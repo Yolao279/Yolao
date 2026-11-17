@@ -631,7 +631,7 @@ function tick() {
 function renderPublic() {
   const { items, teasers, settings } = getStore();
   applySettings(settings);
-  applyLock(activeLock(settings));
+  applyLock(lockForMe(settings));
   const match = (i) => !query || (i.title + ' ' + (i.description || '')).toLowerCase().includes(query);
   const of = (k) => items.filter(i => i.kind === k).sort((a, b) => a.position - b.position);
   renderGrid(document.getElementById('videoGrid'), of('video').filter(match), 'video', query ? 'Aucun résultat.' : 'Aucune vidéo publiée pour le moment.', !query);
@@ -749,6 +749,8 @@ const ICON = {
   clock: 'M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 5h-2v6l5 3 1-1.700-4-2.300V7z',
   tune: 'M3 17v2h6v-2H3zM3 5v2h10V5H3zm10 16v-2h8v-2h-8v-2h-2v6h2zM7 9v2H3v2h4v2h2V9H7zm14 4v-2H11v2h10zm-6-4h2V7h4V5h-4V3h-2v6z',
   down: 'M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z',
+  monitor: 'M21 2H3a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h7v2H8v2h8v-2h-2v-2h7a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zm0 14H3V4h18v12z',
+  devices: 'M4 6h18V4H4a2 2 0 0 0-2 2v11H0v3h14v-3H4V6zm19 2h-6a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1zm-1 9h-4v-7h4v7z',
   build: 'M22.700 19l-9.100-9.100c.9-2.300.4-5-1.500-6.900-2-2-5-2.400-7.400-1.300L9 6 6 9 1.600 4.700C.4 7.100.9 10.100 2.900 12.100c1.900 1.900 4.600 2.400 6.900 1.500l9.100 9.100c.4.400 1 .4 1.400 0l2.300-2.300c.5-.4.5-1.100.1-1.400z',
   sync: 'M12 4V1L8 5l4 4V6c3.300 0 6 2.700 6 6 0 1-.3 2-.7 2.800l1.500 1.500A7.800 7.800 0 0 0 20 12c0-4.400-3.600-8-8-8zm-6.800 1.200A7.800 7.800 0 0 0 4 12c0 4.400 3.600 8 8 8v3l4-4-4-4v3c-3.300 0-6-2.700-6-6 0-1 .3-2 .7-2.800L5.200 5.200z',
   lock: 'M18 8h-1V6a5 5 0 0 0-10 0v2H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2zM9 6a3 3 0 0 1 6 0v2H9V6zm3 11a2 2 0 1 1 0-4 2 2 0 0 1 0 4z',
@@ -773,9 +775,21 @@ const LOCK_TYPES = {
 };
 const REASONS = ['Ajout de nouvelles vidéos', 'Correction de bugs', 'Nouveau design du site', 'Mise à jour du site'];
 const DURATIONS = [[30, '30 min'], [60, '1 h'], [120, '2 h'], [360, '6 h'], [1440, '24 h']];
+const TARGETS = {
+  all: { label: 'Tout', hint: 'PC + téléphone', icon: ICON.devices },
+  pc: { label: 'PC', hint: 'Ordinateurs seulement', icon: ICON.monitor },
+  mobile: { label: 'Téléphone', hint: 'Mobiles et tablettes', icon: ICON.phone }
+};
+const isMobile = () => /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || (/Macintosh/.test(navigator.userAgent) && navigator.maxTouchPoints > 1);
 let currentLock = null;
 
 const activeLock = (s) => (s && s.lock && typeof s.lock.until === 'number' && s.lock.until > Date.now()) ? s.lock : null;
+/* Verrouillage qui concerne CET appareil (PC ou téléphone) */
+function lockForMe(s) {
+  const l = activeLock(s); if (!l) return null;
+  const t = l.targets || 'all';
+  return (t === 'all' || (t === 'mobile') === isMobile()) ? l : null;
+}
 function fmtHMS(ms) {
   const s = Math.max(0, Math.floor(ms / 1000)), p = (n) => String(n).padStart(2, '0');
   return `${p(Math.floor(s / 3600))}:${p(Math.floor(s % 3600 / 60))}:${p(s % 60)}`;
@@ -832,13 +846,14 @@ function lockView(s) {
         el('small', { text: 'VERROUILLAGE ACTIF · ' + T.label.toUpperCase() }),
         el('b', { text: lock.reason }),
         el('span', { class: 'lock-time', id: 'adminLockTimer', text: fmtHMS(lock.until - Date.now()) }),
-        el('small', { text: 'Réouverture automatique : ' + fmtClock(lock.until) })),
+        el('small', { text: 'Réouverture automatique : ' + fmtClock(lock.until) }),
+        el('small', { text: 'Appareils bloqués : ' + (TARGETS[lock.targets || 'all'] || TARGETS.all).label })),
       el('div', { class: 'publish-btns' },
         el('button', { class: 'btn-glow alt', type: 'button', onclick: () => extendLock(60) }, el('span', { text: '+ 1 h' })),
         el('button', { class: 'btn-glow danger', type: 'button', onclick: unlockSite }, icon(ICON.unlock), el('span', { text: 'Lever le verrouillage' }))));
   }
 
-  let type = 'maintenance', mins = 120;
+  let type = 'maintenance', mins = 120, target = 'all';
   const reason = el('textarea', { id: 'l-reason', maxlength: 200, placeholder: 'Pourquoi ? (obligatoire) — ex : ajout de nouvelles vidéos' });
   const summary = el('div', { class: 'lock-summary' });
   const msg = el('div', { class: 'msg', role: 'alert' });
@@ -847,6 +862,11 @@ function lockView(s) {
   const typeBtns = Object.entries(LOCK_TYPES).map(([k, T]) => el('button', {
     type: 'button', 'data-k': k, class: 'lock-type' + (k === type ? ' on' : ''), 'aria-pressed': String(k === type),
     onclick: () => typeBtns.forEach(b => { const on = b.dataset.k === k; if (on) type = k; b.classList.toggle('on', on); b.setAttribute('aria-pressed', String(on)); })
+  }, icon(T.icon), el('b', { text: T.label }), el('small', { text: T.hint })));
+
+  const targetBtns = Object.entries(TARGETS).map(([k, T]) => el('button', {
+    type: 'button', 'data-k': k, class: 'lock-type' + (k === target ? ' on' : ''), 'aria-pressed': String(k === target),
+    onclick: () => targetBtns.forEach(b => { const on = b.dataset.k === k; if (on) target = k; b.classList.toggle('on', on); b.setAttribute('aria-pressed', String(on)); })
   }, icon(T.icon), el('b', { text: T.label }), el('small', { text: T.hint })));
 
   const custom = el('input', { type: 'number', min: 1, max: 10080, placeholder: 'min', class: 'lock-custom', 'aria-label': 'Durée personnalisée en minutes' });
@@ -861,8 +881,9 @@ function lockView(s) {
   upd();
 
   const form = el('form', { class: 'lockpanel' },
-    el('div', { class: 'lock-warn', text: 'Pendant le verrouillage, les visiteurs ne voient qu’un écran avec la raison et un minuteur. Toi, tu gardes l’accès au panel avec la touche W.' }),
+    el('div', { class: 'lock-warn', text: 'Pendant le verrouillage, les visiteurs ne voient qu’un écran avec la raison et un minuteur. Toi, tu gardes l’accès au panel avec la touche W. Sur les autres appareils, le verrouillage apparaît après l’export du fichier de données.' }),
     el('label', { text: 'Type de verrouillage' }), el('div', { class: 'lock-types' }, typeBtns),
+    el('label', { text: 'Appareils à bloquer' }), el('div', { class: 'lock-types' }, targetBtns),
     el('label', { for: 'l-reason', text: 'Raison affichée aux visiteurs' }), reason,
     el('div', { class: 'chips' }, REASONS.map(r => el('button', { type: 'button', class: 'chip', text: r, onclick: () => { reason.value = r; reason.focus(); } }))),
     el('label', { text: 'Durée' }), el('div', { class: 'chips' }, ...chips, custom),
@@ -874,7 +895,7 @@ function lockView(s) {
     if (!why) { msg.textContent = 'Indique la raison du verrouillage.'; reason.focus(); return; }
     if (!confirm(`Verrouiller le site pendant ${mins >= 60 ? (mins / 60).toFixed(mins % 60 ? 1 : 0) + ' h' : mins + ' min'} ?`)) return;
     try {
-      patchSettings({ lock: { type, reason: why, startedAt: Date.now(), until: Date.now() + mins * 60000 } });
+      patchSettings({ lock: { type, targets: target, reason: why, startedAt: Date.now(), until: Date.now() + mins * 60000 } });
       toast('Site verrouillé', 'lock'); showDashboard(); renderPublic();
     } catch (err) { msg.textContent = err.message; }
   });
