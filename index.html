@@ -217,7 +217,7 @@ textarea { resize: vertical; min-height: 70px; }
 @media (max-width: 760px) {
   .studio { grid-template-columns: 1fr; height: 92vh; overflow-y: auto; }
   .side { border-right: 0; border-bottom: 1px solid var(--line); overflow: visible; }
-  .nav { grid-auto-flow: column; grid-auto-columns: minmax(78px, 1fr); overflow-x: auto; }
+  .nav { grid-auto-flow: column; grid-auto-columns: 1fr; overflow-x: auto; }
   .nav button { flex-direction: column; gap: 4px; padding: 10px 6px; font-size: .8rem; text-align: center; }
   .nav em, .brand small { display: none; }
   .side-foot { grid-auto-flow: column; margin-top: 0; }
@@ -303,7 +303,7 @@ body.locked .topbar, body.locked .announce { display: none; }
 .hstat span { color: var(--muted); font-size: .9rem; }
 .hero-cta { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
 .tagbar { display: flex; flex-wrap: wrap; gap: 8px; margin: -8px 0 22px; }
-.tagbar .chip { text-transform: capitalize; }
+.chip { text-transform: capitalize; }
 
 /* Panel : nouveautés */
 .cmd { margin: 0 0 14px; font-family: ui-monospace, Consolas, monospace; color: var(--cyan); background: #06060b; }
@@ -351,56 +351,227 @@ input[type="range"] { padding: 0; accent-color: var(--violet); }
 .row.wrap { justify-content: flex-start; }
 .savebar { position: sticky; bottom: -30px; display: flex; justify-content: flex-end; padding: 16px 0 12px; background: linear-gradient(transparent, var(--panel) 40%); }
 
-
-/* Accueil, calendrier, idées, aperçu, liens */
-.studio-modal[data-pt="neon"] { --violet: #ff2bd6; --violet-2: #b100a0; --cyan: #00f0ff; }
-.studio-modal[data-pt="retro"] { --violet: #fbbf24; --violet-2: #d97706; --cyan: #fb7185; }
-.studio-modal[data-pt="hacker"] { --violet: #22c55e; --violet-2: #15803d; --cyan: #4ade80; }
-.pill { display: inline-block; margin: 4px 0 2px; padding: 2px 10px; border-radius: 99px; font-size: .78rem; font-style: normal; font-weight: 700; }
-.pill.warn { color: #fde68a; background: rgba(245,158,11,.16); border: 1px solid rgba(245,158,11,.5); }
-.pill.ok { color: #86efac; background: rgba(52,211,153,.12); border: 1px solid rgba(52,211,153,.4); }
-.quick { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 14px; }
-.qa { display: grid; justify-items: center; gap: 8px; padding: 16px 8px; font: inherit; font-weight: 600; font-size: .9rem; color: var(--text); cursor: pointer; border-radius: 16px; background: #0c0c13; border: 1px solid var(--line); transition: transform .2s, border-color .2s, box-shadow .2s; }
-.qa svg { width: 26px; height: 26px; fill: var(--violet); }
-.qa:hover { transform: translateY(-3px); border-color: var(--violet); box-shadow: 0 10px 28px color-mix(in srgb, var(--violet) 28%, transparent); }
-.hgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
-.hcard { display: grid; gap: 4px; align-content: start; padding: 14px 16px; border-radius: 16px; background: #0c0c13; border: 1px solid var(--line); }
-.hcard small { color: var(--muted); font-size: .76rem; text-transform: uppercase; letter-spacing: .08em; }
-.hcard span { color: var(--muted); font-size: .88rem; }
-.hcard .good { color: #34d399; } .hcard .bad { color: var(--red); }
-.tplchip { display: inline-flex; }
-.tplchip .chip:first-child { border-radius: 999px 0 0 999px; }
-.tplchip .chip.x { border-radius: 0 999px 999px 0; padding: 7px 10px; border-left: 0; }
-.cal { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; }
-.cal-h { text-align: center; color: var(--muted); font-size: .78rem; text-transform: uppercase; letter-spacing: .08em; padding: 4px 0; }
-.cal-c { min-height: 92px; padding: 6px; display: grid; align-content: start; gap: 3px; border-radius: 12px; background: #0c0c13; border: 1px solid var(--line); overflow: hidden; }
-.cal-c.empty { background: transparent; border-color: transparent; }
-.cal-c.today { border-color: var(--violet); box-shadow: 0 0 18px color-mix(in srgb, var(--violet) 35%, transparent); }
-.cal-c b { font-size: .82rem; color: var(--muted); }
-.cal-c small { color: var(--muted); }
-.ev { display: block; padding: 2px 6px; border-radius: 6px; font-size: .72rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; background: rgba(255,255,255,.07); }
-.ev.sch { background: color-mix(in srgb, var(--violet) 40%, transparent); }
-.ev.tea { background: color-mix(in srgb, var(--cyan) 30%, transparent); }
-.cal-title { font-size: 1.15rem; text-transform: capitalize; }
-.board { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 8px; }
-.bcol { padding: 4px 10px 12px; border-radius: 16px; background: #0a0a11; border: 1px solid var(--line); display: grid; gap: 8px; align-content: start; }
-.idea { display: grid; gap: 8px; padding: 10px 12px; border-radius: 12px; background: #12121c; border: 1px solid var(--line); overflow-wrap: anywhere; }
-.ia { display: flex; gap: 6px; }
-.item.drag { opacity: .4; } .item.over { border-color: var(--cyan); box-shadow: 0 0 0 2px color-mix(in srgb, var(--cyan) 40%, transparent); }
-.item[draggable="true"] { cursor: grab; }
-a.btn { display: inline-block; }
-.modal.pv { width: min(1100px, 100%); height: min(90vh, 820px); display: flex; flex-direction: column; }
-.pv-stage { flex: 1; min-height: 0; display: flex; justify-content: center; border-radius: 14px; background: #05050a; overflow: hidden; }
-.pv-frame { width: 100%; height: 100%; border: 0; background: #000; transition: width .3s; }
-.linkgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: 12px; }
-.linkbtn { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 16px 20px; font-weight: 700; border-radius: 16px; background: var(--panel); border: 1px solid var(--line); transition: transform .25s, border-color .25s, box-shadow .25s; }
-.linkbtn i { font-style: normal; color: var(--cyan); }
-.linkbtn:hover { transform: translateY(-3px); border-color: var(--violet); box-shadow: 0 0 26px color-mix(in srgb, var(--violet) 40%, transparent); }
-@media (max-width: 760px) { .board { grid-template-columns: 1fr; } .cal-c { min-height: 64px; } .ev { font-size: .6rem; } }
-
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .reveal { opacity: 1; transform: none; }
+}
+
+/* =====================================================================
+   Événements : comptes à rebours placés où tu veux sur le site
+   ===================================================================== */
+.evslot { display: grid; gap: 18px; }
+.evslot:empty { display: none; }
+.evslot.inmain { width: min(1180px, 100% - 40px); margin: 40px auto 0; }
+main > .evslot { margin-top: 40px; }
+#slot-hero { width: min(980px, 100% - 40px); margin: 32px auto 0; text-align: left; }
+.teasers .ev { grid-column: 1 / -1; }
+body.locked .evslot, body.locked .evfloat { display: none; }
+.ev { --ev: #9d4dff; }
+.ev-live { display: none; }
+.ev-cta, .ev-link { display: none; }
+.ev.done .ev-cta, .ev.cta-now .ev-cta, .ev.done .ev-link, .ev.cta-now .ev-link { display: inline-flex; }
+
+/* --- Grand format : "event" --- */
+.ev-full { position: relative; isolation: isolate; padding: 2px; color: #fff;
+  background: linear-gradient(135deg, var(--ev), color-mix(in srgb, var(--ev) 12%, #000) 38%, color-mix(in srgb, var(--ev) 12%, #000) 62%, var(--ev));
+  clip-path: polygon(0 0, calc(100% - 38px) 0, 100% 38px, 100% 100%, 38px 100%, 0 calc(100% - 38px)); }
+.ev-face { position: relative; overflow: hidden; padding: clamp(24px, 4.4vw, 52px) clamp(20px, 4.6vw, 56px) clamp(30px, 4.4vw, 54px);
+  background:
+    radial-gradient(90% 130% at 100% 0%, color-mix(in srgb, var(--ev) 38%, transparent), transparent 62%),
+    linear-gradient(180deg, #0d0a18, #07050f);
+  clip-path: polygon(0 0, calc(100% - 37px) 0, 100% 37px, 100% 100%, 37px 100%, 0 calc(100% - 37px)); }
+.ev-face::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: repeating-linear-gradient(-58deg, transparent 0 26px, rgba(255, 255, 255, .028) 26px 28px); }
+.ev-face::after { content: ""; position: absolute; top: 0; bottom: 0; left: 0; width: 38%; z-index: -1; pointer-events: none;
+  background: linear-gradient(105deg, transparent, color-mix(in srgb, var(--ev) 22%, transparent), transparent);
+  transform: translateX(-120%) skewX(-18deg); animation: evsheen 7s ease-in-out infinite; }
+@keyframes evsheen { 0%, 55% { transform: translateX(-120%) skewX(-18deg); } 100% { transform: translateX(380%) skewX(-18deg); } }
+.ev-media { position: absolute; top: 0; right: 0; bottom: 0; width: 58%; z-index: -1; opacity: .85; }
+.ev-media img { width: 100%; height: 100%; object-fit: cover;
+  -webkit-mask-image: linear-gradient(to left, #000 25%, transparent);
+  mask-image: linear-gradient(to left, #000 25%, transparent); }
+.ev-body { position: relative; }
+.ev-badge { display: inline-block; padding: 6px 16px; background: var(--ev); color: #0a0612; font-weight: 900; font-size: .86rem; letter-spacing: .06em; text-transform: uppercase; transform: skewX(-12deg); }
+.ev-badge span { display: block; transform: skewX(12deg); }
+.ev-title { margin: 16px 0 8px; font-size: clamp(2.1rem, 7vw, 4.8rem); font-weight: 900; font-style: italic; line-height: .95; text-transform: uppercase; letter-spacing: -.01em; overflow-wrap: anywhere;
+  text-shadow: 0 0 46px color-mix(in srgb, var(--ev) 80%, transparent), 3px 3px 0 color-mix(in srgb, var(--ev) 55%, #000); }
+.ev-sub { max-width: 56ch; margin: 0; font-size: clamp(1rem, 2vw, 1.15rem); color: rgba(255, 255, 255, .78); }
+.ev-count { display: flex; align-items: stretch; gap: clamp(4px, 1.2vw, 10px); margin: 26px 0 8px; max-width: 640px; }
+.ev-unit { flex: 1 1 0; min-width: 0; padding: clamp(8px, 1.6vw, 14px) 4px clamp(8px, 1.4vw, 12px); text-align: center; background: rgba(255, 255, 255, .06); border: 1px solid rgba(255, 255, 255, .14); border-bottom: 3px solid var(--ev); transform: skewX(-8deg); backdrop-filter: blur(4px); }
+.ev-unit > * { display: block; transform: skewX(8deg); }
+.ev-unit b { font-size: clamp(1.9rem, 7.4vw, 4.3rem); font-weight: 900; font-style: italic; line-height: 1; font-variant-numeric: tabular-nums; text-shadow: 0 0 26px var(--ev); }
+.ev-unit small { margin-top: 5px; font-size: clamp(.58rem, 1.6vw, .74rem); letter-spacing: .12em; text-transform: uppercase; color: rgba(255, 255, 255, .62); }
+.ev-unit b.tick { animation: evpop .4s ease; }
+@keyframes evpop { 30% { transform: scale(1.12); color: var(--ev); } }
+.ev-sep { align-self: center; font-size: clamp(1.2rem, 4vw, 2.4rem); font-weight: 900; color: var(--ev); opacity: .8; }
+.ev-full .ev-live { margin: 22px 0 4px; font-size: clamp(1.8rem, 6vw, 3.4rem); font-weight: 900; font-style: italic; text-transform: uppercase; text-shadow: 0 0 34px var(--ev), 3px 3px 0 color-mix(in srgb, var(--ev) 55%, #000); overflow-wrap: anywhere; }
+.ev-full.done .ev-count { display: none; }
+.ev-full.done .ev-live { display: block; }
+.ev-foot { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; margin-top: 18px; }
+.ev-date { color: rgba(255, 255, 255, .68); font-size: .95rem; }
+.ev-cta, .ev-link { align-items: center; padding: 12px 28px; background: #fff; color: #0a0612; font-weight: 900; font-style: italic; text-transform: uppercase; transform: skewX(-10deg); transition: background .2s, color .2s, box-shadow .2s; }
+.ev-cta span, .ev-link span { display: block; transform: skewX(10deg); }
+.ev-cta:hover, .ev-link:hover { background: var(--ev); color: #fff; box-shadow: 0 0 30px var(--ev); }
+.ev-bar { position: absolute; left: 0; right: 0; bottom: 0; height: 5px; background: rgba(255, 255, 255, .08); }
+.ev-bar i { display: block; height: 100%; width: calc(var(--p, 0) * 1%); background: linear-gradient(90deg, var(--ev), #fff); box-shadow: 0 0 16px var(--ev); }
+.ev.hot .ev-unit { border-bottom-color: #ff4d6d; }
+.ev.hot .ev-unit b { color: #ffe3e8; }
+
+/* --- Bandeau (haut du site) et carte à plat --- */
+.ev-compact { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 14px; color: #fff; }
+.ev-compact.at-top { justify-content: center; padding: 10px 16px; background: linear-gradient(90deg, color-mix(in srgb, var(--ev) 88%, #000), color-mix(in srgb, var(--ev) 42%, #000)); }
+.ev-compact.at-flow { padding: 14px 20px; border-radius: 6px; background: #0b0912; border: 1px solid color-mix(in srgb, var(--ev) 55%, transparent); border-left: 5px solid var(--ev); box-shadow: 0 0 34px color-mix(in srgb, var(--ev) 18%, transparent); }
+.ev-tag { padding: 2px 12px; background: var(--ev); color: #0a0612; font-weight: 900; font-size: .78rem; text-transform: uppercase; letter-spacing: .05em; transform: skewX(-12deg); }
+.at-top .ev-tag { background: #fff; }
+.ev-ctitle { font-weight: 800; font-style: italic; overflow-wrap: anywhere; }
+.ev-mini { display: inline-flex; align-items: baseline; gap: 3px; font-variant-numeric: tabular-nums; }
+.ev-mini b { margin-left: 8px; font-size: 1.2em; font-weight: 900; }
+.ev-mini b:first-child { margin-left: 0; }
+.ev-mini small { opacity: .75; font-size: .82em; }
+.ev-compact .ev-live { font-weight: 900; font-style: italic; }
+.ev-compact.done .ev-mini { display: none; }
+.ev-compact.done .ev-live { display: inline; }
+.ev-link { padding: 5px 16px; font-size: .88rem; }
+
+/* --- Carte flottante --- */
+.evfloat { position: fixed; right: 18px; bottom: 18px; z-index: 35; display: grid; gap: 10px; width: min(330px, calc(100vw - 36px)); }
+.evfloat:empty { display: none; }
+.ev-float { position: relative; padding: 16px 16px 16px; color: #fff; border-radius: 10px; background: linear-gradient(160deg, color-mix(in srgb, var(--ev) 22%, #0d0a18), #08060f 70%); border: 1px solid color-mix(in srgb, var(--ev) 60%, transparent); box-shadow: 0 20px 54px rgba(0, 0, 0, .6), 0 0 44px color-mix(in srgb, var(--ev) 28%, transparent); }
+.ev-float .ev-tag { display: inline-block; margin-bottom: 8px; }
+.ev-float .ev-ctitle { display: block; padding-right: 26px; font-size: 1.15rem; }
+.ev-float .ev-count { margin: 12px 0 4px; gap: 5px; }
+.ev-float .ev-unit { padding: 6px 2px; }
+.ev-float .ev-unit b { font-size: 1.55rem; }
+.ev-float .ev-unit small { font-size: .56rem; margin-top: 2px; }
+.ev-float .ev-sep { display: none; }
+.ev-float .ev-live { margin: 12px 0 2px; font-size: 1.3rem; font-weight: 900; font-style: italic; text-transform: uppercase; }
+.ev-float.done .ev-count { display: none; }
+.ev-float.done .ev-live { display: block; }
+.ev-float .ev-cta { margin-top: 12px; padding: 9px 22px; }
+.ev-x { position: absolute; top: 8px; right: 8px; width: 28px; height: 28px; display: grid; place-items: center; font-size: 1.2rem; line-height: 1; color: rgba(255, 255, 255, .7); background: rgba(255, 255, 255, .08); border: 0; border-radius: 50%; cursor: pointer; }
+.ev-x:hover { color: #fff; background: rgba(255, 255, 255, .2); }
+@media (max-width: 560px) {
+  .ev-full { clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 24px 100%, 0 calc(100% - 24px)); }
+  .ev-face { clip-path: polygon(0 0, calc(100% - 23px) 0, 100% 23px, 100% 100%, 23px 100%, 0 calc(100% - 23px)); }
+  .ev-sep { display: none; }
+  .evfloat { right: 10px; bottom: 10px; width: calc(100vw - 20px); }
+  .ev-compact.at-top { font-size: .9rem; }
+}
+
+/* =====================================================================
+   Panel admin : nouveau look
+   ===================================================================== */
+.modal.studio-modal { width: min(1200px, 100%); }
+.studio { height: min(92vh, 880px); grid-template-columns: 256px minmax(0, 1fr); background: #09090f; }
+.side { gap: 4px; padding: 20px 16px 18px;
+  background: radial-gradient(120% 50% at 0% 0%, color-mix(in srgb, var(--violet) 34%, transparent), transparent 62%), linear-gradient(180deg, #0e0e18, #08080e); }
+.brand { padding: 2px 8px 16px; margin-bottom: 2px; border-bottom: 1px solid var(--line); }
+.nav { gap: 3px; }
+.nav-title { margin: 18px 12px 5px; font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: rgba(255, 255, 255, .34); }
+.nav button { position: relative; padding: 11px 14px; }
+.nav button.on::before { content: ""; position: absolute; left: -16px; top: 9px; bottom: 9px; width: 4px; border-radius: 0 4px 4px 0; background: var(--cyan); box-shadow: 0 0 16px var(--cyan); }
+.nav button.on svg { color: var(--cyan); filter: drop-shadow(0 0 6px var(--cyan)); }
+.nav em.hot { color: #fff; background: var(--red); box-shadow: 0 0 14px var(--red); }
+.side-foot { padding-top: 12px; }
+.main { padding: 28px 34px 36px; background: radial-gradient(70% 38% at 100% 0%, color-mix(in srgb, var(--violet) 13%, transparent), transparent 70%); }
+.main .dash-head { align-items: flex-end; margin-bottom: 18px; }
+.main .dash-head .dash-title h3 { margin: 0; font-size: clamp(1.55rem, 3vw, 2.1rem); letter-spacing: -.02em; background: linear-gradient(90deg, #fff, #cfc0ff 75%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.dash-title p { margin: 4px 0 0; color: var(--muted); }
+.main .dash-head .btn.primary { padding: 12px 22px; border-radius: 999px; font-weight: 800; }
+.main .dash-head .btn.back { background: transparent; }
+.cmd { border-radius: 14px; }
+.stat { display: flex; align-items: center; gap: 14px; padding: 16px 18px; border-radius: 18px; background: linear-gradient(160deg, color-mix(in srgb, var(--c, var(--violet)) 12%, #0e0e17), #0b0b12); border: 1px solid color-mix(in srgb, var(--c, var(--violet)) 30%, var(--line)); }
+.stat .si { flex: none; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 13px; color: var(--c, var(--violet)); background: color-mix(in srgb, var(--c, var(--violet)) 18%, #0c0c13); }
+.stat .si svg { width: 22px; height: 22px; fill: currentColor; }
+.stat b { font-size: 1.7rem; }
+.stats.four { grid-template-columns: repeat(4, 1fr); }
+.home-sub { margin: 26px 0 10px; font-size: 1.05rem; }
+.quick { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
+.qa { display: flex; align-items: center; gap: 12px; padding: 16px 18px; font: inherit; font-weight: 700; text-align: left; color: var(--text); cursor: pointer; border-radius: 16px; background: #0e0e17; border: 1px solid var(--line); transition: transform .2s, border-color .2s, box-shadow .2s; }
+.qa svg { width: 22px; height: 22px; fill: var(--cyan); flex: none; }
+.qa:hover { transform: translateY(-2px); border-color: var(--violet); box-shadow: 0 12px 30px color-mix(in srgb, var(--violet) 22%, transparent); }
+
+/* Liste des événements */
+.evlist { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; margin-top: 16px; }
+.evc { position: relative; display: grid; gap: 6px; padding: 16px 16px 14px 20px; overflow: hidden; border-radius: 16px; background: linear-gradient(160deg, color-mix(in srgb, var(--ev) 16%, #0d0d15), #0b0b12 65%); border: 1px solid color-mix(in srgb, var(--ev) 32%, var(--line)); transition: transform .2s, box-shadow .2s; }
+.evc::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--ev); box-shadow: 0 0 18px var(--ev); }
+.evc:hover { transform: translateY(-2px); box-shadow: 0 14px 34px color-mix(in srgb, var(--ev) 22%, transparent); }
+.evc.pause { opacity: .72; }
+.evc h4 { margin: 2px 0 0; font-size: 1.1rem; overflow-wrap: anywhere; }
+.evc small { color: var(--muted); }
+.evc-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; }
+.evc-state { padding: 2px 11px; border-radius: 99px; font-size: .76rem; font-weight: 700; }
+.evc-state.live { color: #6ee7b7; background: rgba(52, 211, 153, .16); }
+.evc-state.done { color: var(--muted); background: rgba(255, 255, 255, .08); }
+.evc-state.pause { color: #fcd34d; background: rgba(251, 191, 36, .15); }
+.evc-place { font-size: .8rem; color: var(--muted); }
+.evc-time { margin: 6px 0 2px; font-size: 1.4rem; font-weight: 800; font-variant-numeric: tabular-nums; }
+.evc-time .ev-live { font-size: 1.05rem; color: var(--muted); }
+.evc-time.done .ev-mini { display: none; }
+.evc-time.done .ev-live { display: inline; }
+.evc-actions { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.ev-empty { display: grid; justify-items: center; gap: 12px; padding: 38px 20px; text-align: center; border: 1.5px dashed var(--line); border-radius: 22px; background: rgba(255, 255, 255, .02); }
+.ev-empty h4 { margin: 0; font-size: 1.25rem; }
+.ev-empty p { max-width: 46ch; margin: 0; color: var(--muted); }
+
+/* Éditeur d'événement */
+.ed { --ed: #9d4dff; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 440px); gap: 24px; align-items: start; }
+.ed-form { display: grid; gap: 14px; min-width: 0; }
+.ed-card { padding: 16px 18px 18px; border-radius: 18px; background: #0c0c13; border: 1px solid var(--line); }
+.ed-card h4 { margin: 0 0 2px; font-size: 1.02rem; }
+.ed-card > label:first-of-type { margin-top: 8px; }
+.ed-note { margin: 8px 0 0; font-size: .84rem; color: var(--muted); }
+.ed-cap { display: block; margin-top: 8px; color: var(--cyan); font-weight: 600; }
+.ed-prev { position: sticky; top: 0; display: grid; gap: 12px; min-width: 0; }
+.ed-prev h4 { margin: 0; font-size: 1.02rem; }
+.ed-stage { display: grid; min-width: 0; padding: 16px; border-radius: 18px; background: repeating-conic-gradient(#0d0d14 0 25%, #0a0a10 0 50%) 0 0 / 22px 22px; border: 1px solid var(--line); overflow: hidden; }
+.ed-stage .ev-full { font-size: .9em; }
+.ed-stage .ev-title { font-size: clamp(1.7rem, 4vw, 2.6rem); }
+.ed-stage .ev-unit b { font-size: clamp(1.4rem, 3.4vw, 2.2rem); }
+.opts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 10px; }
+.opt { display: grid; gap: 4px; align-content: start; padding: 10px; font: inherit; text-align: left; color: var(--text); cursor: pointer; border-radius: 14px; background: #10101a; border: 1px solid var(--line); transition: border-color .2s, box-shadow .2s, opacity .2s; }
+.opt small { color: var(--muted); font-size: .78rem; }
+.opt:hover:not(:disabled) { border-color: var(--ed); }
+.opt.on { border-color: var(--ed); box-shadow: 0 0 24px color-mix(in srgb, var(--ed) 40%, transparent); }
+.opt:disabled { opacity: .38; cursor: not-allowed; }
+.th { position: relative; display: block; height: 36px; margin-bottom: 4px; overflow: hidden; border-radius: 8px; background: linear-gradient(135deg, color-mix(in srgb, var(--ed) 50%, #12121c), #12121c); }
+.th-event::after { content: ""; position: absolute; left: 10px; right: 10px; bottom: 7px; height: 12px; background: repeating-linear-gradient(90deg, rgba(255, 255, 255, .75) 0 16%, transparent 16% 21%); transform: skewX(-12deg); }
+.th-classic::after { content: ""; position: absolute; inset: 7px 12px; border-radius: 5px; background: rgba(255, 255, 255, .16); }
+.th-compact::after { content: ""; position: absolute; left: 8px; right: 8px; top: 14px; height: 8px; border-radius: 4px; background: var(--ed); }
+.swatches { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 10px; }
+.swc { width: 34px; height: 34px; padding: 0; cursor: pointer; border-radius: 50%; background: var(--c); border: 2px solid transparent; transition: transform .15s, box-shadow .15s; }
+.swc:hover { transform: scale(1.1); }
+.swc.on { border-color: #fff; box-shadow: 0 0 18px var(--c); }
+.swc-pick { width: 38px; height: 34px; padding: 0; border: 0; border-radius: 10px; background: transparent; cursor: pointer; }
+.map { position: relative; display: grid; gap: 6px; max-width: 460px; margin-top: 10px; padding: 12px; border-radius: 16px; background: #07070c; border: 1px solid var(--line); }
+.mz { display: flex; align-items: center; justify-content: center; min-height: 32px; padding: 6px 10px; font: inherit; font-size: .78rem; font-weight: 700; color: var(--muted); cursor: pointer; border-radius: 8px; background: repeating-linear-gradient(-45deg, rgba(255, 255, 255, .035) 0 8px, transparent 8px 16px); border: 1.5px dashed rgba(255, 255, 255, .22); transition: border-color .2s, color .2s, box-shadow .2s, background .2s; }
+.mz:hover { color: var(--text); border-color: var(--cyan); }
+.mz.on { color: #fff; border-style: solid; border-color: var(--ed); background: color-mix(in srgb, var(--ed) 32%, #0b0b12); box-shadow: 0 0 24px color-mix(in srgb, var(--ed) 55%, transparent); }
+.z-float { position: absolute; right: 12px; bottom: 36px; width: 34%; min-height: 0; padding: 8px 6px; background-color: #0b0b12; }
+.mf { display: flex; align-items: center; gap: 6px; padding: 8px; border-radius: 8px; background: #12121b; }
+.mf i { display: block; border-radius: 4px; background: #262637; }
+.f-nav { height: 20px; }
+.f-nav i { flex: none; width: 28px; height: 5px; }
+.f-hero { flex-direction: column; gap: 5px; padding: 12px; }
+.f-hero .av { width: 30px; height: 30px; border-radius: 50%; }
+.f-hero .ln { width: 58%; height: 5px; }
+.f-hero .ln.s { width: 34%; }
+.f-row { height: 40px; }
+.f-row i { flex: 1; height: 100%; }
+.f-row.shorts { height: 50px; }
+.f-foot { height: 14px; }
+.ed-save { position: sticky; bottom: -36px; z-index: 2; display: flex; align-items: center; justify-content: flex-end; gap: 10px; flex-wrap: wrap; padding: 16px 0 14px; background: linear-gradient(transparent, #09090f 38%); }
+@media (max-width: 1020px) {
+  .ed { grid-template-columns: 1fr; }
+  .ed-prev { position: static; order: -1; }
+}
+@media (max-width: 760px) {
+  .nav-title { display: none; }
+  .nav button.on::before { display: none; }
+  .stats.four { grid-template-columns: 1fr 1fr; }
+  .opts { grid-template-columns: 1fr; }
+  .main { padding: 20px 16px 28px; }
+  .ed-save { bottom: 0; }
 }
 
 </style>
@@ -411,6 +582,7 @@ a.btn { display: inline-block; }
   <div class="grain"></div>
 
   <div class="announce" id="announce" hidden></div>
+  <div class="evslot" id="slot-top"></div>
   <div class="topbar" id="topbar">
     <a class="tb-brand" href="#top"><img id="navAvatar" alt=""><span>Yolao</span></a>
     <nav class="tb-links" id="tbLinks" aria-label="Menu principal">
@@ -418,7 +590,6 @@ a.btn { display: inline-block; }
       <a href="#teasersSection" data-s="teasersSection">Prochainement</a>
       <a href="#videosSection" data-s="videosSection">Vidéos</a>
       <a href="#shortsSection" data-s="shortsSection">Shorts</a>
-      <a href="#linksSection" data-s="linksSection">Liens</a>
       <a href="#aboutSection" data-s="aboutSection">À propos</a>
     </nav>
     <a class="btn-glow tb-cta" id="navSub" target="_blank" rel="noopener">S’abonner</a>
@@ -440,6 +611,7 @@ a.btn { display: inline-block; }
       <button class="btn-glow alt" id="ctaRandom" type="button">Vidéo au hasard</button>
       <a class="btn-glow alt" id="ctaSub" target="_blank" rel="noopener">S’abonner</a>
     </div>
+    <div class="evslot" id="slot-hero"></div>
   </header>
 
   <main>
@@ -458,15 +630,14 @@ a.btn { display: inline-block; }
       <div class="more-wrap"><button class="btn-glow alt" id="moreBtn" type="button" hidden>Voir plus de vidéos</button></div>
     </section>
 
+    <div class="evslot" id="slot-vids"></div>
+
     <section class="block reveal" id="shortsSection">
       <h2>Derniers Shorts</h2>
       <div class="short-grid" id="shortGrid"></div>
     </section>
 
-    <section class="block reveal" id="linksSection" hidden>
-      <h2>Mes liens</h2>
-      <div class="linkgrid" id="linkGrid"></div>
-    </section>
+    <div class="evslot" id="slot-shorts"></div>
 
     <section class="block reveal" id="aboutSection" hidden>
       <h2>À propos</h2>
@@ -474,10 +645,14 @@ a.btn { display: inline-block; }
     </section>
   </main>
 
+  <div class="evslot inmain" id="slot-footer"></div>
+
   <footer class="footer">
     <span>© Yolao</span>
     <span class="footer-links" id="footerLinks"></span>
   </footer>
+
+  <div class="evfloat" id="slot-float"></div>
 
   <div id="lockScreen" class="lockscreen" hidden></div>
 
@@ -543,7 +718,6 @@ const fmtDate = (d) => d ? new Date(d + 'T12:00:00').toLocaleDateString('fr-FR',
 
 
 /* ======= Données : stockage local (admin) + fichier publié yolao-data.json (visiteurs) ======= */
-const PREVIEW = /[?&]preview=1/.test(location.search);
 const K = { items: 'yolao.items', teasers: 'yolao.teasers', settings: 'yolao.settings', pw: 'yolao.pw' };
 const DATA_KEYS = ['items', 'teasers', 'settings'];
 let published = { items: [], teasers: [], settings: {} };
@@ -554,7 +728,7 @@ const safeImg = (u) => typeof u === 'string' && /^(https?:\/\/|data:image\/(jpeg
 const isAdmin = () => sessionStorage.getItem('yolao.admin') === '1';
 
 function readLocal(k) { try { return JSON.parse(localStorage.getItem(K[k])); } catch { return null; } }
-const PREF_DEF = { panelTheme: 'site', volume: 70, idleMin: 10, boot: true, confirmDel: true, lockMins: 120, lockTarget: 'all' };
+const PREF_DEF = { volume: 70, idleMin: 10, boot: true, confirmDel: true, lockMins: 120, lockTarget: 'all' };
 function getPrefs() { try { return { ...PREF_DEF, ...(JSON.parse(localStorage.getItem('yolao.prefs')) || {}) }; } catch { return { ...PREF_DEF }; } }
 function setPrefs(p) { localStorage.setItem('yolao.prefs', JSON.stringify({ ...getPrefs(), ...p })); }
 let lastSnap = 0, seeding = false;
@@ -587,18 +761,7 @@ function getStore() {
   if (!hasLocal()) return published;
   return { items: readLocal('items') || [], teasers: readLocal('teasers') || [], settings: readLocal('settings') || {} };
 }
-function dataHash() {
-  const s = JSON.stringify([readLocal('items') || [], readLocal('teasers') || [], readLocal('settings') || {}]);
-  let h = 5381; for (let i = 0; i < s.length; i++) h = ((h << 5) + h + s.charCodeAt(i)) | 0;
-  return String(h);
-}
-const isDirty = () => localStorage.getItem('yolao.pubhash') !== dataHash();
-const markPublished = () => localStorage.setItem('yolao.pubhash', dataHash());
-function seedLocal() {
-  seeding = true;
-  try { DATA_KEYS.forEach(k => { if (localStorage.getItem(K[k]) === null) save(k, published[k]); }); } finally { seeding = false; }
-  if (localStorage.getItem('yolao.pubhash') === null) markPublished();
-}
+function seedLocal() { seeding = true; try { DATA_KEYS.forEach(k => { if (localStorage.getItem(K[k]) === null) save(k, published[k]); }); } finally { seeding = false; } }
 async function loadPublished() {
   try {
     const r = await fetch('yolao-data.json', { cache: 'no-store' });
@@ -650,16 +813,25 @@ function saveItem(b, id) {
   logAct((id ? 'Modification' : 'Ajout') + ' : ' + fields.title);
 }
 function saveTeaser(b, id) {
-  if (!b.title.trim()) throw new Error('Titre requis.');
+  const clip = (s, n) => String(s || '').trim().slice(0, n);
+  const title = clip(b.title, 120);
+  if (!title) throw new Error('Titre requis.');
   if (!b.at || isNaN(new Date(b.at))) throw new Error('Date et heure requises.');
-  if (b.link && !isHttp(b.link)) throw new Error('Lien invalide (https://…).');
+  const link = clip(b.link, 500);
+  if (link && !isHttp(link)) throw new Error('Lien invalide (https://…).');
   if (b.image && !safeImg(b.image)) throw new Error('Image invalide.');
   const list = readLocal('teasers') || [];
-  const fields = { title: b.title.trim(), description: b.description.trim(), at: b.at, image: b.image, link: b.link.trim() };
+  const fields = {
+    title, description: clip(b.description, 400), at: new Date(b.at).toISOString(), image: b.image || '', link,
+    linkLabel: clip(b.linkLabel, 30) || 'Regarder', badge: clip(b.badge, 30), endText: clip(b.endText, 60) || 'C’est parti !',
+    place: EV_PLACES[b.place] ? b.place : 'intro', style: EV_STYLES[b.style] ? b.style : 'event',
+    color: /^#[0-9a-f]{6}$/i.test(b.color || '') ? b.color.toLowerCase() : '#9d4dff', endMode: b.endMode === 'hide' ? 'hide' : 'live',
+    ctaNow: !!b.ctaNow, enabled: b.enabled !== false
+  };
   if (id) { const t = list.find(x => x.id === id); if (!t) throw new Error('Introuvable.'); Object.assign(t, fields); }
-  else list.push({ id: Date.now(), ...fields });
+  else list.push({ id: Date.now(), created: Date.now(), ...fields });
   save('teasers', list);
-  logAct((id ? 'Teaser modifié' : 'Teaser ajouté') + ' : ' + fields.title);
+  logAct((id ? 'Événement modifié' : 'Événement ajouté') + ' : ' + title);
 }
 function removeById(key, id) { save(key, (readLocal(key) || []).filter(i => i.id !== id)); }
 function moveItem(id, dir) {
@@ -699,7 +871,7 @@ function defaultAt() {
 }
 
 /* ======= Site public ======= */
-const ACCENTS = { orange: ['#f59e0b', '#d97706'], violet: ['#8b5cf6', '#6d3ff0'], cyan: ['#22d3ee', '#0ea5c4'], rouge: ['#ff4d6d', '#e11d48'], vert: ['#34d399', '#10b981'] };
+const ACCENTS = { violet: ['#8b5cf6', '#6d3ff0'], cyan: ['#22d3ee', '#0ea5c4'], rouge: ['#ff4d6d', '#e11d48'], vert: ['#34d399', '#10b981'] };
 const SOCIAL_NAMES = { discord: 'Discord', instagram: 'Instagram', tiktok: 'TikTok', x: 'X' };
 let query = '';
 
@@ -749,19 +921,14 @@ function setupHeader() {
   img.addEventListener('error', () => { img.hidden = true; document.getElementById('avatarFallback').hidden = false; });
 }
 
-function activeEvent(s) {
-  const d = new Date(), md = String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
-  return (s.events || []).find(e => e.from && e.to && (e.from <= e.to ? md >= e.from && md <= e.to : md >= e.from || md <= e.to));
-}
 function applySettings(s) {
   SET = s;
   applyDisplay(s);
-  const ev = activeEvent(s);
-  const [a, b] = ACCENTS[(ev && ev.accent) || s.accent] || ACCENTS.violet;
+  const [a, b] = ACCENTS[s.accent] || ACCENTS.violet;
   document.documentElement.style.setProperty('--violet', a);
   document.documentElement.style.setProperty('--violet-2', b);
   document.getElementById('tagline').textContent = s.tagline || CONFIG.tagline;
-  const an = (ev && ev.text) ? { text: ev.text, tone: 'info' } : (s.announce || {}), ab = document.getElementById('announce'), ac = ANN[an.tone] || ANN.info;
+  const an = s.announce || {}, ab = document.getElementById('announce'), ac = ANN[an.tone] || ANN.info;
   ab.hidden = !an.text; ab.textContent = an.text || '';
   ab.style.background = `linear-gradient(90deg, ${ac}, color-mix(in srgb, ${ac} 55%, #000))`;
 
@@ -780,10 +947,6 @@ function applySettings(s) {
   const about = (s.about || '').trim();
   document.getElementById('aboutSection').hidden = !about;
   document.getElementById('aboutText').textContent = about;
-  const ll = (s.linksList || []).filter(l => l.label && isHttp(l.url));
-  document.getElementById('linksSection').hidden = !ll.length;
-  document.getElementById('linkGrid').replaceChildren(...ll.map(l =>
-    el('a', { class: 'linkbtn', href: l.url, target: '_blank', rel: 'noopener' }, el('span', { text: l.label }), el('i', { text: '↗' }))));
 }
 
 function card(item, kind, featured) {
@@ -853,17 +1016,131 @@ function teaserCard(t) {
       isHttp(t.link) ? el('a', { class: 'btn primary go', href: t.link, target: '_blank', rel: 'noopener', text: 'Regarder' }) : null));
 }
 
+/* ======= Événements : comptes à rebours placés où tu veux ======= */
+const EV_PLACES = {
+  top: { label: 'Bandeau tout en haut', hint: 'Une bande fine tout en haut de la page, au-dessus du menu.' },
+  hero: { label: 'Sous mon profil', hint: 'Juste sous les boutons de l’en-tête, bien visible dès l’arrivée.' },
+  intro: { label: 'Section « Prochainement »', hint: 'Le premier bloc de la page, avant les vidéos.' },
+  vids: { label: 'Entre vidéos et Shorts', hint: 'Entre la grille de vidéos et celle des Shorts.' },
+  shorts: { label: 'Après les Shorts', hint: 'Sous la grille de Shorts.' },
+  footer: { label: 'Avant le pied de page', hint: 'Tout en bas du site, juste avant les liens.' },
+  float: { label: 'Flottant', hint: 'Petite carte fixe en bas à droite. Les visiteurs peuvent la fermer.' }
+};
+const EV_STYLES = {
+  event: { label: 'Event', hint: 'Grand format façon Fortnite' },
+  classic: { label: 'Carte', hint: 'Carte simple avec image' },
+  compact: { label: 'Bandeau', hint: 'Une seule ligne discrète' }
+};
+const EV_COLORS = ['#9d4dff', '#22d3ee', '#ff4d6d', '#fbbf24', '#34d399', '#ff4fd8', '#3b82f6', '#fb923c'];
+const EV_DEF = { title: '', description: '', badge: 'Événement', at: '', image: '', link: '', linkLabel: 'Regarder', place: 'intro', style: 'event', color: '#9d4dff', endMode: 'live', endText: 'C’est parti !', ctaNow: false, enabled: true };
+/* Les anciens teasers n'ont pas ces champs : ils gardent leur look « carte » */
+function evNorm(t) {
+  const n = { ...EV_DEF, style: 'classic', badge: '', ...t };
+  if (!EV_PLACES[n.place]) n.place = 'intro';
+  if (!EV_STYLES[n.style]) n.style = 'event';
+  return n;
+}
+const evColor = (t) => /^#[0-9a-f]{6}$/i.test(t.color || '') ? t.color : '#9d4dff';
+function evActive(t, now = Date.now()) {
+  if (t.enabled === false) return false;
+  const left = new Date(t.at) - now;
+  if (isNaN(left)) return false;
+  return left > 0 || (evNorm(t).endMode !== 'hide' && now - new Date(t.at) < 7 * 864e5);
+}
+const evClosedList = () => { try { return JSON.parse(sessionStorage.getItem('yolao.evx') || '[]'); } catch { return []; } };
+const evClose = (id) => { try { sessionStorage.setItem('yolao.evx', JSON.stringify([...evClosedList(), String(id)])); } catch { /* ignore */ } };
+const fmtEv = (at) => new Date(at).toLocaleString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' });
+function toLocalInput(d) {
+  const p = (n) => String(n).padStart(2, '0');
+  return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}T${p(d.getHours())}:${p(d.getMinutes())}`;
+}
+function miniUnits() {
+  return el('span', { class: 'ev-mini' }, ...['d', 'h', 'm', 's'].flatMap(u => [el('b', { 'data-u': u, text: '00' }), el('small', { text: u === 'd' ? 'j' : u })]));
+}
+
+/* Construit un compte à rebours (site public et aperçu du panel) */
+function eventEl(raw, o = {}) {
+  const t = evNorm(raw), col = evColor(t);
+  const kind = t.place === 'top' ? 'top' : t.place === 'float' ? 'float' : t.style;
+  const link = isHttp(t.link) ? t.link : '';
+  const cta = (cls) => link ? el('a', { class: cls, href: link, target: '_blank', rel: 'noopener' }, el('span', { text: t.linkLabel || 'Regarder' })) : null;
+  const attrs = { 'data-at': t.at, 'data-since': t.created || '', style: '--ev:' + col };
+  const now = t.ctaNow ? ' cta-now' : '';
+
+  if (kind === 'classic') { const n = teaserCard(t); n.style.setProperty('--ev', col); return n; }
+
+  if (kind === 'top' || kind === 'compact') {
+    return el('article', { class: 'ev ev-compact ' + (kind === 'top' ? 'at-top' : 'at-flow') + now, role: 'timer', ...attrs },
+      t.badge ? el('span', { class: 'ev-tag', text: t.badge }) : null,
+      el('b', { class: 'ev-ctitle', text: t.title }),
+      miniUnits(),
+      el('span', { class: 'ev-live', text: t.endText }),
+      cta('ev-link'));
+  }
+
+  const parts = [];
+  ['jours', 'heures', 'minutes', 'secondes'].forEach((lab, i) => {
+    if (i) parts.push(el('span', { class: 'ev-sep', text: ':' }));
+    parts.push(el('div', { class: 'ev-unit' }, el('b', { 'data-u': 'dhms'[i], text: '00' }), el('small', { text: lab })));
+  });
+
+  if (kind === 'float') {
+    const box = el('article', { class: 'ev ev-float' + now, ...attrs },
+      o.preview ? null : el('button', { class: 'ev-x', type: 'button', 'aria-label': 'Fermer', text: '×', onclick: () => { evClose(t.id); box.remove(); } }),
+      t.badge ? el('span', { class: 'ev-tag', text: t.badge }) : null,
+      el('b', { class: 'ev-ctitle', text: t.title }),
+      el('div', { class: 'ev-count', role: 'timer' }, parts),
+      el('div', { class: 'ev-live', text: t.endText }),
+      cta('ev-cta'));
+    return box;
+  }
+
+  return el('article', { class: 'ev ev-full' + now, ...attrs },
+    el('div', { class: 'ev-face' },
+      safeImg(t.image) ? el('div', { class: 'ev-media' }, el('img', { src: t.image, alt: '' })) : null,
+      el('div', { class: 'ev-body' },
+        t.badge ? el('span', { class: 'ev-badge' }, el('span', { text: t.badge })) : null,
+        el('h3', { class: 'ev-title', text: t.title }),
+        t.description ? el('p', { class: 'ev-sub', text: t.description }) : null,
+        el('div', { class: 'ev-count', role: 'timer' }, parts),
+        el('div', { class: 'ev-live', text: t.endText }),
+        el('div', { class: 'ev-foot' }, el('span', { class: 'ev-date', text: 'Départ : ' + fmtEv(t.at) }), cta('ev-cta'))),
+      el('div', { class: 'ev-bar' }, el('i'))));
+}
+
+function renderEvents(teasers) {
+  const now = Date.now(), closed = evClosedList();
+  const list = teasers.filter(t => evActive(t, now)).sort((a, b) => new Date(a.at) - new Date(b.at));
+  const by = (p) => list.filter(t => evNorm(t).place === p);
+  const put = (id, arr) => document.getElementById(id).replaceChildren(...arr.map(t => eventEl(t)));
+  put('slot-top', by('top')); put('slot-hero', by('hero')); put('slot-vids', by('vids'));
+  put('slot-shorts', by('shorts')); put('slot-footer', by('footer'));
+  put('slot-float', by('float').filter(t => !closed.includes(String(t.id))));
+  const intro = by('intro');
+  document.getElementById('teasersSection').hidden = !intro.length;
+  put('teaserGrid', intro);
+}
+
 function tick() {
   tickLock();
   if (Date.now() >= nextPub) { renderPublic(); return; }
-  document.querySelectorAll('.teaser').forEach(n => {
-    const left = new Date(n.dataset.at) - Date.now();
+  const now = Date.now();
+  document.querySelectorAll('[data-at]').forEach(n => {
+    const end = new Date(n.dataset.at), left = end - now;
     const done = isNaN(left) || left <= 0;
     n.classList.toggle('done', done);
+    n.classList.toggle('hot', !done && left < 36e5);
+    const since = +n.dataset.since;
+    if (since && end > since) n.style.setProperty('--p', done ? 100 : Math.min(100, Math.max(0, (now - since) / (end - since) * 100)).toFixed(2));
     if (done) return;
     const s = Math.floor(left / 1000);
-    const v = [Math.floor(s / 86400), Math.floor(s % 86400 / 3600), Math.floor(s % 3600 / 60), s % 60];
-    n.querySelectorAll('[data-u]').forEach((b, i) => { b.textContent = String(v[i]).padStart(2, '0'); });
+    const v = { d: Math.floor(s / 86400), h: Math.floor(s % 86400 / 3600), m: Math.floor(s % 3600 / 60), s: s % 60 };
+    n.querySelectorAll('[data-u]').forEach(b => {
+      const txt = String(v[b.dataset.u]).padStart(2, '0');
+      if (b.textContent === txt) return;
+      b.textContent = txt;
+      if (b.dataset.u === 's') { b.classList.remove('tick'); void b.offsetWidth; b.classList.add('tick'); }
+    });
   });
 }
 
@@ -878,6 +1155,7 @@ function renderPublic() {
   const now = Date.now();
   const vis = items.filter(i => !i.publishAt || new Date(i.publishAt) <= now);
   nextPub = Math.min(Infinity, ...items.map(i => i.publishAt ? +new Date(i.publishAt) : Infinity).filter(x => x > now));
+  nextPub = Math.min(nextPub, ...teasers.filter(t => t.enabled !== false && evNorm(t).endMode === 'hide').map(t => +new Date(t.at)).filter(x => x > now));
 
   const allTags = [...new Set(vis.flatMap(tagsOf))].sort();
   if (activeTag && !allTags.includes(activeTag)) activeTag = '';
@@ -902,9 +1180,7 @@ function renderPublic() {
   renderGrid(document.getElementById('videoGrid'), vlist, 'video', filtering ? 'Aucun résultat.' : 'Aucune vidéo publiée pour le moment.', !filtering);
   renderGrid(document.getElementById('shortGrid'), shorts.filter(match), 'short', filtering ? 'Aucun résultat.' : 'Aucun Short publié pour le moment.', false);
 
-  const live = teasers.filter(t => Date.now() - new Date(t.at) < 7 * 864e5).sort((a, b) => new Date(a.at) - new Date(b.at));
-  document.getElementById('teasersSection').hidden = !live.length;
-  document.getElementById('teaserGrid').replaceChildren(...live.map(teaserCard));
+  renderEvents(teasers);
   document.querySelectorAll('#tbLinks a').forEach(a => { const s = document.getElementById(a.dataset.s); a.hidden = !!(s && s.hidden); });
   tick();
 }
@@ -970,6 +1246,7 @@ const Sound = (() => {
 
 const adminRoot = document.getElementById('adminRoot');
 let tab = 'home';
+let editing = null;
 let booted = false;
 adminRoot.addEventListener('click', (e) => { if (e.target.closest('button')) Sound.play('click'); });
 new MutationObserver((muts) => {
@@ -986,7 +1263,7 @@ function toast(text, snd = 'success') {
   document.body.append(t);
   setTimeout(() => t.remove(), 2500 + text.length * 45);
 }
-function closeAdmin() { if (adminRoot.children.length) Sound.play('close'); booted = false; adminRoot.replaceChildren(); }
+function closeAdmin() { if (adminRoot.children.length) Sound.play('close'); booted = false; editing = null; adminRoot.replaceChildren(); }
 function openOverlay(modal) {
   const overlay = el('div', { class: 'overlay' }, modal);
   overlay.addEventListener('mousedown', (e) => { if (e.target === overlay) overlay.remove(); });
@@ -1015,7 +1292,7 @@ function showLogin() {
 }
 
 function exportData() {
-  logAct('Export des données'); markPublished(); confetti();
+  logAct('Export des données'); confetti();
   const d = { items: readLocal('items') || [], teasers: readLocal('teasers') || [], settings: readLocal('settings') || {} };
   const a = el('a', { href: URL.createObjectURL(new Blob([JSON.stringify(d, null, 1)], { type: 'application/json' })), download: 'yolao-data.json' });
   document.body.append(a); a.click(); a.remove();
@@ -1033,14 +1310,12 @@ async function importData(file) {
 
 const ICON = {
   play: 'M8 5v14l11-7z',
+  home: 'M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z',
+  bolt: 'M7 2v11h3v9l7-12h-4l4-8z',
   phone: 'M7 2h10a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm5 16a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.400zM7 5v11h10V5H7z',
   clock: 'M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 5h-2v6l5 3 1-1.700-4-2.300V7z',
   tune: 'M3 17v2h6v-2H3zM3 5v2h10V5H3zm10 16v-2h8v-2h-8v-2h-2v6h2zM7 9v2H3v2h4v2h2V9H7zm14 4v-2H11v2h10zm-6-4h2V7h4V5h-4V3h-2v6z',
   down: 'M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z',
-  home: 'M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z',
-  cal: 'M19 4h-1V2h-2v2H8V2H6v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 16H5V9h14v11z',
-  board: 'M4 4h4v16H4zm6 0h4v10h-4zm6 0h4v13h-4z',
-  eye: 'M12 4.500C7 4.500 2.700 7.600 1 12c1.700 4.400 6 7.500 11 7.500s9.300-3.100 11-7.500c-1.700-4.400-6-7.500-11-7.500zM12 17a5 5 0 1 1 0-10 5 5 0 0 1 0 10zm0-8a3 3 0 1 0 0 6 3 3 0 0 0 0-6z',
   history: 'M13 3a9 9 0 0 0-9 9H1l3.900 3.900.1.100L9 12H6a7 7 0 1 1 2.100 5l-1.400 1.400A9 9 0 1 0 13 3zm-1 5v5l4.300 2.500.7-1.200-3.500-2.100V8H12z',
   monitor: 'M21 2H3a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h7v2H8v2h8v-2h-2v-2h7a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zm0 14H3V4h18v12z',
   devices: 'M4 6h18V4H4a2 2 0 0 0-2 2v11H0v3h14v-3H4V6zm19 2h-6a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1zm-1 9h-4v-7h4v7z',
@@ -1057,8 +1332,14 @@ function icon(d) {
   const p = document.createElementNS(ns, 'path'); p.setAttribute('d', d); p.setAttribute('fill-rule', 'evenodd'); svg.append(p);
   return svg;
 }
-const TABS = [['home', 'Accueil', ICON.home], ['video', 'Vidéos', ICON.play], ['short', 'Shorts', ICON.phone], ['teaser', 'Teasers', ICON.clock], ['cal', 'Calendrier', ICON.cal], ['idea', 'Idées', ICON.board], ['lock', 'Verrouillage', ICON.lock], ['log', 'Historique', ICON.history], ['settings', 'Réglages', ICON.tune]];
-const TITLES = { home: 'Tableau de bord', cal: 'Calendrier de publication', idea: 'Idées de vidéos', video: 'Mes vidéos', short: 'Mes Shorts', teaser: 'Teasers & comptes à rebours', lock: 'Verrouillage du site', log: 'Historique & sauvegardes', settings: 'Réglages du site' };
+const TABS = [['home', 'Accueil', ICON.home], ['video', 'Vidéos', ICON.play], ['short', 'Shorts', ICON.phone], ['teaser', 'Événements', ICON.bolt], ['lock', 'Verrouillage', ICON.lock], ['settings', 'Réglages', ICON.tune], ['log', 'Historique', ICON.history]];
+const TAB_GROUP = { home: 'Général', video: 'Contenu', short: 'Contenu', teaser: 'Compte à rebours', lock: 'Site', settings: 'Site', log: 'Système' };
+const TITLES = { home: 'Tableau de bord', video: 'Mes vidéos', short: 'Mes Shorts', teaser: 'Événements & comptes à rebours', lock: 'Verrouillage du site', log: 'Historique & sauvegardes', settings: 'Réglages du site' };
+const SUBS = {
+  home: 'L’état de ton site en un coup d’œil.', video: 'Ajoute, ordonne et programme tes vidéos.', short: 'Tes Shorts, dans l’ordre que tu veux.',
+  teaser: 'Crée un compte à rebours et place-le où tu veux sur le site.', lock: 'Ferme le site pendant une maintenance, avec la raison et un minuteur.',
+  settings: 'Nom, apparence, affichage et sécurité.', log: 'Sauvegardes automatiques et journal d’activité.'
+};
 
 /* ======= Verrouillage du site (maintenance / mise à jour / bloqué) ======= */
 const LOCK_TYPES = {
@@ -1222,9 +1503,16 @@ function logView() {
 /* Barre de commandes */
 function runCmd(raw) {
   const [c, ...r] = raw.replace(/^[:\/]/, '').trim().split(/\s+/), arg = r.join(' ');
-  const go = (k) => { tab = k; showDashboard(); };
+  const go = (k) => { tab = k; editing = null; showDashboard(); };
   switch ((c || '').toLowerCase()) {
-    case 'help': return 'Commandes : tab <home|video|short|teaser|cal|idea|lock|log|settings> · lock <minutes> <raison> · unlock · announce <texte|off> · theme <violet|cyan|rouge|vert> · export · confetti · logout';
+    case 'help': return 'Commandes : tab <home|video|short|teaser|lock|log|settings> · event <minutes> <titre> · lock <minutes> <raison> · unlock · announce <texte|off> · theme <violet|cyan|rouge|vert> · export · confetti · logout';
+    case 'event': case 'countdown': {
+      const m = parseInt(r[0], 10), name = r.slice(1).join(' ');
+      if (!m || m < 1 || !name) return 'Erreur : event <minutes> <titre>, ex : event 30 Grand live';
+      const list = readLocal('teasers') || [];
+      list.push({ id: Date.now(), created: Date.now(), ...EV_DEF, title: name, at: new Date(Date.now() + m * 60000).toISOString() });
+      save('teasers', list); logAct(`Événement rapide (${m} min) : ${name}`); renderPublic(); go('teaser'); return 'Événement créé';
+    }
     case 'tab': if (!TITLES[arg]) return 'Erreur : onglet inconnu.'; go(arg); return 'Onglet ouvert';
     case 'lock': {
       const m = parseInt(r[0], 10), why = r.slice(1).join(' ');
@@ -1261,156 +1549,221 @@ function confetti() {
   })();
 }
 
-/* Glisser-déposer + dupliquer */
-let dragId = null;
-function dragProps(it) {
-  return {
-    draggable: 'true',
-    ondragstart: (e) => { dragId = it.id; e.dataTransfer.effectAllowed = 'move'; e.currentTarget.classList.add('drag'); },
-    ondragend: (e) => e.currentTarget.classList.remove('drag'),
-    ondragover: (e) => { e.preventDefault(); e.currentTarget.classList.add('over'); },
-    ondragleave: (e) => e.currentTarget.classList.remove('over'),
-    ondrop: (e) => { e.preventDefault(); dropItem(dragId, it.id); }
-  };
-}
-function dropItem(from, to) {
-  if (!from || from === to) return;
-  const items = readLocal('items') || [];
-  const a = items.find(i => i.id === from), b = items.find(i => i.id === to);
-  if (!a || !b || a.kind !== b.kind) return;
-  const list = items.filter(i => i.kind === a.kind).sort((x, y) => x.position - y.position);
-  const ti = list.indexOf(b); list.splice(list.indexOf(a), 1); list.splice(ti, 0, a);
-  list.forEach((x, n) => { x.position = n; });
-  save('items', items); logAct('Ordre modifié'); showDashboard(); renderPublic();
-}
-function dupItem(it) {
-  const items = readLocal('items') || [];
-  const pos = Math.min(0, ...items.filter(i => i.kind === it.kind).map(i => i.position)) - 1;
-  items.push({ ...it, id: Date.now(), title: it.title + ' (copie)', position: pos, pinned: false });
-  save('items', items); logAct('Duplication : ' + it.title); toast('Dupliqué'); showDashboard(); renderPublic();
-}
-
-/* Voir comme un visiteur */
-function openPreview() {
-  const url = location.href.split(/[?#]/)[0] + '?preview=1';
-  const frame = el('iframe', { class: 'pv-frame', src: url, title: 'Aperçu du site' });
-  const modal = el('div', { class: 'modal pv' },
-    el('div', { class: 'dash-head' }, el('h3', { text: 'Voir comme un visiteur' }),
-      el('div', { class: 'row flush wrap' },
-        el('button', { class: 'btn small', text: 'Ordinateur', onclick: () => { frame.style.width = '100%'; } }),
-        el('button', { class: 'btn small', text: 'Téléphone', onclick: () => { frame.style.width = '390px'; } }),
-        el('a', { class: 'btn small', href: url, target: '_blank', rel: 'noopener', text: 'Nouvel onglet' }),
-        el('button', { class: 'btn small', text: 'Retour au panel', onclick: showDashboard }))),
-    el('div', { class: 'pv-stage' }, frame));
-  adminRoot.replaceChildren(openOverlay(modal));
-}
-
-/* Accueil : tableau de bord */
-const TPL_DEF = ['Nouvelle vidéo ce soir !', 'Maintenance rapide en cours, merci de votre patience', 'Merci à tous pour votre soutien !'];
-const getTpl = () => { try { return JSON.parse(localStorage.getItem('yolao.tpl')) || TPL_DEF; } catch { return TPL_DEF; } };
-function applyAnn(x) {
-  const cur = (readLocal('settings') || {}).announce || {};
-  patchSettings({ announce: x ? { text: x, tone: cur.tone || 'info' } : {} });
-  logAct('Annonce : ' + (x || 'retirée')); renderPublic(); toast(x ? 'Annonce publiée' : 'Annonce retirée'); showDashboard();
-}
-function homeView(s) {
-  const now = Date.now();
-  const sched = s.items.filter(i => i.publishAt && new Date(i.publishAt) > now).sort((a, b) => new Date(a.publishAt) - new Date(b.publishAt))[0];
-  const nextT = s.teasers.filter(t => new Date(t.at) > now).sort((a, b) => new Date(a.at) - new Date(b.at))[0];
-  const lock = activeLock(s.settings);
-  let log = []; try { log = (JSON.parse(localStorage.getItem('yolao.log')) || []).slice(0, 5); } catch { /* ignore */ }
-  const card = (title, ...kids) => el('div', { class: 'hcard' }, el('small', { text: title }), ...kids);
-  const qa = (label, d, fn) => el('button', { class: 'qa', type: 'button', onclick: fn }, icon(d), el('span', { text: label }));
-  const tpls = getTpl();
-  const add = el('input', { class: 'cmd', placeholder: 'Nouveau modèle d’annonce… (Entrée pour l’ajouter)', onkeydown: (e) => {
-    if (e.key === 'Enter' && e.target.value.trim()) { localStorage.setItem('yolao.tpl', JSON.stringify([...tpls, e.target.value.trim()])); showDashboard(); }
-  } });
-  return el('div', {},
-    el('div', { class: 'quick' },
-      qa('Ajouter une vidéo', ICON.play, () => { tab = 'video'; showDashboard(); showForm(null); }),
-      qa('Nouveau teaser', ICON.clock, () => { tab = 'teaser'; showDashboard(); showTeaserForm(null); }),
-      qa('Verrouiller le site', ICON.lock, () => { tab = 'lock'; showDashboard(); }),
-      qa('Exporter', ICON.down, () => { exportData(); showDashboard(); }),
-      qa('Voir comme un visiteur', ICON.eye, openPreview)),
-    el('div', { class: 'hgrid' },
-      card('Prochaine publication', el('b', { text: sched ? sched.title : 'Rien de programmé' }), sched ? el('span', { text: fmtDateTime(sched.publishAt) }) : null),
-      card('Prochain teaser', el('b', { text: nextT ? nextT.title : 'Aucun teaser à venir' }), nextT ? el('span', { text: fmtDateTime(nextT.at) }) : null),
-      card('État du site', el('b', { class: lock ? 'bad' : 'good', text: lock ? 'Verrouillé · ' + fmtHMS(lock.until - now) : 'En ligne' }), lock ? el('span', { text: lock.reason }) : null),
-      card('Dernières actions', ...(log.length ? log.map(l => el('span', { text: l.x })) : [el('span', { text: 'Rien pour le moment' })]))),
-    el('h4', { class: 'sub', text: 'Annonces rapides (un clic = bandeau publié sur le site)' }),
-    el('div', { class: 'chips' },
-      ...tpls.map((x, i) => el('span', { class: 'tplchip' },
-        el('button', { type: 'button', class: 'chip', text: x, onclick: () => applyAnn(x) }),
-        el('button', { type: 'button', class: 'chip x', 'aria-label': 'Supprimer ce modèle', text: '×', onclick: () => { localStorage.setItem('yolao.tpl', JSON.stringify(tpls.filter((_, j) => j !== i))); showDashboard(); } }))),
-      el('button', { type: 'button', class: 'chip', text: 'Retirer l’annonce', onclick: () => applyAnn('') })),
-    add);
-}
-
-/* Calendrier */
-let calMonth = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
-function calendarView(s) {
-  const y = calMonth.getFullYear(), m = calMonth.getMonth(), days = new Date(y, m + 1, 0).getDate(), pad = (calMonth.getDay() + 6) % 7;
-  const ev = {}, now = new Date();
-  const add = (d, txt, cls) => { const dt = new Date(d); if (dt.getFullYear() === y && dt.getMonth() === m) (ev[dt.getDate()] = ev[dt.getDate()] || []).push({ txt, cls }); };
-  s.items.forEach(i => { if (i.publishAt) add(i.publishAt, '▶ ' + i.title, 'sch'); else if (i.date) add(i.date + 'T12:00', i.title, 'pub'); });
-  s.teasers.forEach(t => add(t.at, '⏱ ' + t.title, 'tea'));
-  const cells = [...Array(pad).fill(0), ...Array.from({ length: days }, (_, i) => i + 1)];
-  const nav = (d) => () => { calMonth = new Date(y, m + d, 1); showDashboard(); };
-  return el('div', {},
-    el('div', { class: 'dash-head' },
-      el('b', { class: 'cal-title', text: calMonth.toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' }) }),
-      el('div', { class: 'row flush' },
-        el('button', { class: 'btn small', 'aria-label': 'Mois précédent', text: '←', onclick: nav(-1) }),
-        el('button', { class: 'btn small', text: 'Aujourd’hui', onclick: () => { calMonth = new Date(now.getFullYear(), now.getMonth(), 1); showDashboard(); } }),
-        el('button', { class: 'btn small', 'aria-label': 'Mois suivant', text: '→', onclick: nav(1) }))),
-    el('div', { class: 'cal' },
-      ...['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'].map(d => el('div', { class: 'cal-h', text: d })),
-      ...cells.map(d => el('div', { class: 'cal-c' + (!d ? ' empty' : '') + (d && d === now.getDate() && m === now.getMonth() && y === now.getFullYear() ? ' today' : '') },
-        d ? el('b', { text: String(d) }) : null,
-        ...((ev[d] || []).slice(0, 3).map(x => el('span', { class: 'ev ' + x.cls, text: x.txt, title: x.txt }))),
-        (ev[d] || []).length > 3 ? el('small', { text: '+' + (ev[d].length - 3) }) : null))),
-    el('p', { class: 'set-desc', text: '▶ vidéo programmée · ⏱ teaser · couleur neutre = vidéo déjà publiée' }));
-}
-
-/* Tableau d'idées */
-const IDEA_COLS = [['idea', 'Idées'], ['doing', 'En cours'], ['done', 'Publié']];
-const getIdeas = () => { try { return JSON.parse(localStorage.getItem('yolao.ideas')) || []; } catch { return []; } };
-const setIdeas = (l) => localStorage.setItem('yolao.ideas', JSON.stringify(l));
-function ideasView() {
-  const list = getIdeas();
-  const move = (it, d) => { const i = IDEA_COLS.findIndex(c => c[0] === it.col) + d; if (i < 0 || i > 2) return; it.col = IDEA_COLS[i][0]; setIdeas(list); showDashboard(); };
-  const input = el('input', { class: 'cmd', placeholder: 'Nouvelle idée de vidéo… (Entrée pour l’ajouter)', onkeydown: (e) => {
-    if (e.key === 'Enter' && e.target.value.trim()) { setIdeas([...list, { id: Date.now(), text: e.target.value.trim(), col: 'idea' }]); showDashboard(); }
-  } });
-  return el('div', {}, input, el('p', { class: 'set-desc', text: 'Ces idées restent dans ce navigateur : elles ne sont pas publiées.' }),
-    el('div', { class: 'board' }, ...IDEA_COLS.map(([k, l]) => el('div', { class: 'bcol' },
-      el('h4', { class: 'sub', text: l + ' · ' + list.filter(i => i.col === k).length }),
-      ...list.filter(i => i.col === k).map(it => el('div', { class: 'idea' }, el('span', { text: it.text }),
-        el('div', { class: 'ia' },
-          el('button', { class: 'btn small', 'aria-label': 'Reculer', text: '←', disabled: k === 'idea', onclick: () => move(it, -1) }),
-          el('button', { class: 'btn small', 'aria-label': 'Avancer', text: '→', disabled: k === 'done', onclick: () => move(it, 1) }),
-          el('button', { class: 'btn small danger', 'aria-label': 'Supprimer', text: '×', onclick: () => { setIdeas(list.filter(x => x !== it)); showDashboard(); } }))))))));
-}
-
 function openFolder() {
   const u = (getStore().settings.publishUrl || '').trim();
   if (!isHttp(u)) { tab = 'settings'; showDashboard(); toast('Colle d’abord le lien de ton dossier d’hébergement dans Réglages.'); return; }
   window.open(u, '_blank', 'noopener');
 }
 
+/* ======= Événements : liste, éditeur, accueil ======= */
+const PRESETS = [
+  ['Event façon Fortnite', { style: 'event', place: 'intro', color: '#9d4dff', badge: 'Événement', title: 'Grand événement', endText: 'C’est parti !' }],
+  ['Sortie de vidéo', { style: 'event', place: 'vids', color: '#22d3ee', badge: 'Nouvelle vidéo', title: 'La prochaine vidéo arrive', linkLabel: 'Regarder' }],
+  ['Live YouTube', { style: 'compact', place: 'top', color: '#ff4d6d', badge: 'Live', title: 'Live sur YouTube', endText: 'En direct maintenant !', linkLabel: 'Rejoindre', ctaNow: true }],
+  ['Petite carte dans le coin', { style: 'compact', place: 'float', color: '#fbbf24', badge: 'Bientôt', title: 'Quelque chose arrive…' }]
+];
+
+function startEvent(t, preset) {
+  const base = t ? { ...evNorm(t) } : { ...EV_DEF, at: new Date(Date.now() + 864e5).toISOString(), ...(preset || {}) };
+  if (!t) { const x = new Date(Date.now() + 864e5); x.setHours(18, 0, 0, 0); base.at = x.toISOString(); }
+  editing = { id: t ? t.id : null, d: base };
+  tab = 'teaser';
+  showDashboard();
+}
+function evStatus(t) {
+  const left = new Date(t.at) - Date.now();
+  if (t.enabled === false) return ['pause', 'En pause'];
+  if (isNaN(left)) return ['done', 'Date invalide'];
+  return left <= 0 ? ['done', 'Terminé'] : ['live', 'Actif'];
+}
+function patchEvent(id, fn, log) {
+  const list = readLocal('teasers') || [], x = list.find(i => i.id === id);
+  if (!x) return;
+  fn(x, list); save('teasers', list); logAct(log(x)); showDashboard(); renderPublic();
+}
+function evCard(t0) {
+  const t = evNorm(t0), [st, label] = evStatus(t);
+  return el('article', { class: 'evc ' + st, style: '--ev:' + evColor(t) },
+    el('div', { class: 'evc-top' }, el('span', { class: 'evc-state ' + st, text: label }), el('span', { class: 'evc-place', text: EV_PLACES[t.place].label })),
+    el('h4', { text: t.title }),
+    el('small', { text: fmtDateTime(t.at) }),
+    el('div', { class: 'evc-time', 'data-at': t.at }, miniUnits(), el('span', { class: 'ev-live', text: 'Terminé' })),
+    el('div', { class: 'evc-actions' },
+      el('button', { class: 'btn small', type: 'button', text: 'Modifier', onclick: () => startEvent(t0) }),
+      el('button', { class: 'btn small', type: 'button', text: 'Dupliquer', onclick: () => patchEvent(t0.id, (x, l) => l.push({ ...x, id: Date.now(), created: Date.now(), title: x.title + ' (copie)' }), x => 'Événement dupliqué : ' + x.title) }),
+      el('button', { class: 'btn small', type: 'button', text: t.enabled === false ? 'Reprendre' : 'Mettre en pause', onclick: () => patchEvent(t0.id, x => { x.enabled = x.enabled === false; }, x => (x.enabled ? 'Événement repris : ' : 'Événement en pause : ') + x.title) }),
+      el('button', { class: 'btn small danger', type: 'button', text: 'Supprimer', onclick: () => remove('teasers', t0) })));
+}
+function eventsView(s) {
+  if (editing) return eventEditor();
+  const list = [...s.teasers].sort((a, b) => new Date(a.at) - new Date(b.at));
+  if (!list.length) return el('div', { class: 'ev-empty' },
+    el('h4', { text: 'Aucun compte à rebours pour le moment' }),
+    el('p', { text: 'Choisis un modèle : tu pourras tout changer ensuite (texte, date, couleur, emplacement).' }),
+    el('div', { class: 'chips' }, PRESETS.map(([l, p]) => el('button', { class: 'chip', type: 'button', text: l, onclick: () => startEvent(null, p) }))));
+  return el('div', { class: 'evlist' }, list.map(evCard));
+}
+
+function placeMap(onPick) {
+  const zone = (p, cls) => el('button', { type: 'button', class: 'mz ' + cls, 'data-p': p, onclick: () => onPick(p) }, el('span', { text: EV_PLACES[p].label }));
+  const fake = (cls, ...k) => el('div', { class: 'mf ' + cls }, ...k);
+  return el('div', { class: 'map' },
+    zone('top', 'z-top'),
+    fake('f-nav', el('i'), el('i'), el('i')),
+    fake('f-hero', el('i', { class: 'av' }), el('i', { class: 'ln' }), el('i', { class: 'ln s' })),
+    zone('hero', 'z-hero'), zone('intro', 'z-intro'),
+    fake('f-row', el('i'), el('i'), el('i')),
+    zone('vids', 'z-vids'),
+    fake('f-row shorts', el('i'), el('i'), el('i'), el('i')),
+    zone('shorts', 'z-shorts'), zone('footer', 'z-footer'),
+    fake('f-foot'),
+    zone('float', 'z-float'));
+}
+
+function eventEditor() {
+  const E = editing, d = E.d;
+  const root = el('div', { class: 'ed' });
+  const msg = el('div', { class: 'msg', role: 'alert' });
+  const stage = el('div', { class: 'ed-stage' });
+  const okAt = () => d.at && !isNaN(new Date(d.at));
+  const upPrev = () => {
+    stage.replaceChildren(eventEl({ ...d, title: (d.title || '').trim() || 'Titre de ton événement', at: okAt() ? d.at : new Date(Date.now() + 864e5).toISOString(), created: Date.now() }, { preview: true }));
+    root.style.setProperty('--ed', evColor(d));
+    tick();
+  };
+  const inp = (id, key, o = {}) => { const n = el('input', { id, value: d[key] || '', ...o }); n.addEventListener('input', () => { d[key] = n.value; upPrev(); }); return n; };
+  const card = (title, ...kids) => el('section', { class: 'ed-card' }, el('h4', { text: title }), ...kids);
+
+  /* Modèles */
+  const presets = el('div', { class: 'chips' }, PRESETS.map(([l, p]) => el('button', { class: 'chip', type: 'button', text: l, onclick: () => {
+    const wasPreset = PRESETS.some(([, x]) => x.title === d.title);
+    Object.assign(d, p, { title: (!(d.title || '').trim() || wasPreset) ? p.title : d.title });
+    showDashboard();
+  } })));
+
+  /* Texte */
+  const title = inp('e-title', 'title', { maxlength: 120, placeholder: 'Ex : Grand live de Noël' });
+  const badge = inp('e-badge', 'badge', { maxlength: 30, placeholder: 'Ex : Événement, Live, Nouvelle vidéo' });
+  const desc = el('textarea', { id: 'e-desc', maxlength: 400, placeholder: 'Un petit mot pour donner envie (facultatif)' });
+  desc.value = d.description || '';
+  desc.addEventListener('input', () => { d.description = desc.value; upPrev(); });
+
+  /* Date */
+  const at = el('input', { id: 'e-at', type: 'datetime-local', value: toLocalInput(new Date(d.at)) });
+  const cap = el('small', { class: 'ed-cap' });
+  const upCap = () => { const x = new Date(d.at); cap.textContent = isNaN(x) ? 'Choisis une date.' : 'Fin du compte à rebours : ' + fmtEv(d.at) + (x < Date.now() ? ' (déjà passée)' : ''); };
+  const setAt = (x) => { d.at = x.toISOString(); at.value = toLocalInput(x); upCap(); upPrev(); };
+  at.addEventListener('input', () => { const x = new Date(at.value); if (at.value && !isNaN(x)) { d.at = x.toISOString(); upCap(); upPrev(); } });
+  const atTime = (days, h) => { const x = new Date(); x.setDate(x.getDate() + days); x.setHours(h, 0, 0, 0); return x; };
+  const quick = [
+    ['Dans 1 h', () => new Date(Date.now() + 36e5)],
+    ['Ce soir 20 h', () => { const x = atTime(0, 20); return x > Date.now() ? x : atTime(1, 20); }],
+    ['Demain 18 h', () => atTime(1, 18)],
+    ['Samedi 18 h', () => { const x = atTime(0, 18); let k = (6 - x.getDay() + 7) % 7; if (k === 0 && x < Date.now()) k = 7; x.setDate(x.getDate() + k); return x; }],
+    ['Dans 7 jours', () => new Date(Date.now() + 7 * 864e5)]
+  ];
+  const mode = el('select', { id: 'e-mode' }, el('option', { value: 'live', text: 'Afficher le message de fin pendant 7 jours' }), el('option', { value: 'hide', text: 'Faire disparaître le compte à rebours à la fin' }));
+  mode.value = d.endMode === 'hide' ? 'hide' : 'live';
+  mode.addEventListener('change', () => { d.endMode = mode.value; });
+  const endText = inp('e-end', 'endText', { maxlength: 60, placeholder: 'C’est parti !' });
+
+  /* Emplacement */
+  const hint = el('p', { class: 'ed-note' });
+  const map = placeMap((p) => { d.place = p; syncPlace(); upPrev(); });
+  const syncPlace = () => {
+    map.querySelectorAll('.mz').forEach(b => { const on = b.dataset.p === d.place; b.classList.toggle('on', on); b.setAttribute('aria-pressed', String(on)); });
+    hint.textContent = EV_PLACES[d.place].hint;
+    syncStyle();
+  };
+
+  /* Style et couleur */
+  const styleNote = el('p', { class: 'ed-note' });
+  const styleBtns = Object.entries(EV_STYLES).map(([k, S]) => el('button', { type: 'button', class: 'opt', 'data-k': k, onclick: () => { d.style = k; syncStyle(); upPrev(); } },
+    el('i', { class: 'th th-' + k }), el('b', { text: S.label }), el('small', { text: S.hint })));
+  const syncStyle = () => {
+    const forced = d.place === 'top' || d.place === 'float';
+    styleBtns.forEach(b => { b.disabled = forced; b.classList.toggle('on', !forced && b.dataset.k === d.style); });
+    styleNote.textContent = forced ? (d.place === 'top' ? 'Tout en haut, le compte à rebours prend toujours la forme d’un bandeau.' : 'Dans le coin, il prend toujours la forme d’une petite carte.') : '';
+  };
+  const pick = el('input', { type: 'color', class: 'swc-pick', value: evColor(d), 'aria-label': 'Couleur personnalisée' });
+  const sw = EV_COLORS.map(c => el('button', { type: 'button', class: 'swc', style: '--c:' + c, 'data-c': c, 'aria-label': 'Couleur ' + c, onclick: () => setColor(c) }));
+  const setColor = (c) => { d.color = c.toLowerCase(); pick.value = d.color; sw.forEach(b => b.classList.toggle('on', b.dataset.c === d.color)); root.style.setProperty('--ed', d.color); upPrev(); };
+  pick.addEventListener('input', () => setColor(pick.value));
+
+  /* Image et bouton */
+  const file = el('input', { id: 'e-file', type: 'file', accept: 'image/*' });
+  const imgUrl = el('input', { id: 'e-img', type: 'url', placeholder: '…ou colle un lien d’image', value: (d.image || '').startsWith('data:') ? '' : (d.image || '') });
+  const thumb = el('img', { class: 't-prev', alt: '' });
+  const syncImg = () => { thumb.hidden = !d.image; if (d.image) thumb.src = d.image; };
+  file.addEventListener('change', async () => {
+    const f = file.files[0]; if (!f) return;
+    try { d.image = await fileToDataUrl(f); imgUrl.value = ''; msg.textContent = ''; syncImg(); upPrev(); } catch { msg.textContent = 'Image illisible.'; }
+  });
+  imgUrl.addEventListener('input', () => { d.image = imgUrl.value.trim(); syncImg(); upPrev(); });
+  const link = inp('e-link', 'link', { type: 'url', placeholder: 'https://… (facultatif)' });
+  const linkLabel = inp('e-ll', 'linkLabel', { maxlength: 30, placeholder: 'Regarder' });
+  const ctaNow = toggle('e-cta', 'Afficher le bouton dès maintenant', d.ctaNow, 'Sinon il apparaît quand le compte à rebours est terminé.');
+  ctaNow.inp.addEventListener('change', () => { d.ctaNow = ctaNow.inp.checked; upPrev(); });
+  const enabled = toggle('e-on', 'Visible sur le site', d.enabled !== false, 'Désactive pour le mettre en pause sans le supprimer.');
+  enabled.inp.addEventListener('change', () => { d.enabled = enabled.inp.checked; });
+
+  const form = el('form', { class: 'ed-form' },
+    card('Modèles rapides', el('p', { class: 'ed-note', text: 'Un point de départ : tu peux tout modifier après.' }), presets),
+    card('Texte', el('label', { for: 'e-title', text: 'Titre' }), title, el('label', { for: 'e-badge', text: 'Petite étiquette (facultatif)' }), badge, el('label', { for: 'e-desc', text: 'Description (facultatif)' }), desc),
+    card('Date et heure', el('label', { for: 'e-at', text: 'Fin du compte à rebours' }), at, cap,
+      el('div', { class: 'chips' }, quick.map(([l, fn]) => el('button', { class: 'chip', type: 'button', text: l, onclick: () => setAt(fn()) }))),
+      el('label', { for: 'e-mode', text: 'Quand c’est terminé' }), mode, el('label', { for: 'e-end', text: 'Message de fin' }), endText),
+    card('Où l’afficher ?', el('p', { class: 'ed-note', text: 'Clique sur la zone du site où le compte à rebours doit apparaître.' }), map, hint),
+    card('Style et couleur', el('div', { class: 'opts' }, styleBtns), styleNote, el('div', { class: 'swatches' }, ...sw, pick)),
+    card('Image et bouton', el('label', { for: 'e-file', text: 'Image (depuis ton ordinateur)' }), file, el('label', { for: 'e-img', text: 'Ou lien d’image' }), imgUrl, thumb,
+      el('div', { class: 'row flush wrap' }, el('button', { class: 'btn small', type: 'button', text: 'Retirer l’image', onclick: () => { d.image = ''; imgUrl.value = ''; file.value = ''; syncImg(); upPrev(); } })),
+      el('label', { for: 'e-link', text: 'Lien du bouton (vidéo, live, page…)' }), link, el('label', { for: 'e-ll', text: 'Texte du bouton' }), linkLabel, ctaNow.node),
+    card('Visibilité', enabled.node),
+    msg,
+    el('div', { class: 'ed-save' },
+      el('button', { class: 'btn', type: 'button', text: 'Annuler', onclick: () => { editing = null; showDashboard(); } }),
+      el('button', { class: 'btn-glow', type: 'submit' }, icon(ICON.bolt), el('span', { text: E.id ? 'Enregistrer les changements' : 'Créer l’événement' }))));
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    try { saveTeaser(d, E.id); toast('Événement enregistré'); editing = null; showDashboard(); renderPublic(); }
+    catch (err) { msg.textContent = err.message; }
+  });
+
+  root.append(form, el('aside', { class: 'ed-prev' }, el('h4', { text: 'Aperçu en direct' }), stage, el('p', { class: 'ed-note', text: 'C’est ce que verront tes visiteurs. Ça bouge en temps réel.' })));
+  syncPlace(); setColor(evColor(d)); syncImg(); upCap();
+  return root;
+}
+
+function homeView(s) {
+  const now = Date.now();
+  const evs = s.teasers.filter(t => evActive(t, now)).sort((a, b) => new Date(a.at) - new Date(b.at));
+  const next = evs.find(t => new Date(t.at) > now);
+  const lock = activeLock(s.settings);
+  const nV = s.items.filter(i => i.kind === 'video').length, nS = s.items.filter(i => i.kind === 'short').length;
+  const tile = (n, label, d, c) => el('div', { class: 'stat', style: '--c:' + c }, el('span', { class: 'si' }, icon(d)), el('div', {}, el('b', { text: String(n) }), el('span', { text: label })));
+  const qa = (label, d, fn) => el('button', { type: 'button', class: 'qa', onclick: fn }, icon(d), el('span', { text: label }));
+  return el('div', { class: 'home' },
+    el('div', { class: 'stats four' }, tile(nV, 'vidéos', ICON.play, '#8b5cf6'), tile(nS, 'Shorts', ICON.phone, '#22d3ee'), tile(evs.length, 'événements actifs', ICON.bolt, '#fbbf24'), tile(lock ? 'Fermé' : 'Ouvert', 'état du site', lock ? ICON.lock : ICON.unlock, lock ? '#ff4d6d' : '#34d399')),
+    el('h4', { class: 'home-sub', text: 'Prochain compte à rebours' }),
+    next ? el('div', { class: 'ed-stage' }, eventEl(next, { preview: true })) :
+      el('div', { class: 'empty' }, 'Aucun compte à rebours en cours. ', el('button', { class: 'btn small primary', type: 'button', text: 'Créer un événement', onclick: () => startEvent(null, PRESETS[0][1]) })),
+    el('h4', { class: 'home-sub', text: 'Actions rapides' }),
+    el('div', { class: 'quick' },
+      qa('Ajouter une vidéo', ICON.play, () => { tab = 'video'; showForm(null); }),
+      qa('Nouvel événement', ICON.bolt, () => startEvent(null, PRESETS[0][1])),
+      qa('Verrouiller le site', ICON.lock, () => { tab = 'lock'; showDashboard(); }),
+      qa('Exporter les données', ICON.down, exportData)));
+}
+
 function showDashboard() {
   const s = getStore();
-  const live = s.teasers.filter(t => Date.now() - new Date(t.at) < 7 * 864e5).length;
+  const live = s.teasers.filter(t => evActive(t)).length;
   const count = { video: s.items.filter(i => i.kind === 'video').length, short: s.items.filter(i => i.kind === 'short').length, teaser: live, lock: activeLock(s.settings) ? 'ON' : null };
   const importer = el('input', { type: 'file', accept: 'application/json,.json', hidden: true, onchange: (e) => importData(e.target.files[0]) });
   let content, addBtn = null;
 
   if (tab === 'home') {
     content = homeView(s);
-  } else if (tab === 'cal') {
-    content = calendarView(s);
-  } else if (tab === 'idea') {
-    content = ideasView();
   } else if (tab === 'log') {
     content = logView();
   } else if (tab === 'lock') {
@@ -1418,33 +1771,32 @@ function showDashboard() {
   } else if (tab === 'settings') {
     content = settingsView(s.settings);
   } else if (tab === 'teaser') {
-    const list = [...s.teasers].sort((a, b) => new Date(a.at) - new Date(b.at));
-    content = el('div', { class: 'list' }, list.length ? list.map(t => el('div', { class: 'item' },
-      el('img', { src: safeImg(t.image) ? t.image : PLACEHOLDER, alt: '' }),
-      el('div', {}, el('b', { text: t.title }), el('small', { text: fmtDateTime(t.at) })),
-      el('div', { class: 'item-actions' },
-        el('button', { class: 'btn small', text: 'Modifier', onclick: () => showTeaserForm(t) }),
-        el('button', { class: 'btn small danger', text: 'Supprimer', onclick: () => remove('teasers', t) })))) :
-      el('div', { class: 'empty', text: 'Aucun teaser. Ajoutes-en un pour lancer un compte à rebours.' }));
-    addBtn = el('button', { class: 'btn primary', text: '+ Ajouter un teaser', onclick: () => showTeaserForm(null) });
+    content = eventsView(s);
+    addBtn = editing
+      ? el('button', { class: 'btn back', type: 'button', text: '← Retour aux événements', onclick: () => { editing = null; showDashboard(); } })
+      : el('button', { class: 'btn primary', type: 'button', text: '+ Nouvel événement', onclick: () => startEvent(null, PRESETS[0][1]) });
   } else {
     const list = s.items.filter(i => i.kind === tab).sort((a, b) => a.position - b.position);
-    content = el('div', { class: 'list' }, list.length ? list.map((it, i) => el('div', { class: 'item' + (tab === 'short' ? ' is-short' : ''), title: 'Glisse pour changer l’ordre', ...dragProps(it) },
+    content = el('div', { class: 'list' }, list.length ? list.map((it, i) => el('div', { class: 'item' + (tab === 'short' ? ' is-short' : '') },
       el('img', { src: thumbOf(it), alt: '' }),
       el('div', {}, el('b', { text: it.title }), el('small', { text: (fmtDate(it.date) || 'Sans date') + (it.pinned ? ' · épinglé' : '') + (it.publishAt && new Date(it.publishAt) > Date.now() ? ' · programmé ' + fmtDateTime(it.publishAt) : '') })),
       el('div', { class: 'item-actions' },
         el('button', { class: 'btn small', 'aria-label': 'Monter', text: '↑', disabled: i === 0, onclick: () => { moveItem(it.id, 'up'); showDashboard(); renderPublic(); } }),
         el('button', { class: 'btn small', 'aria-label': 'Descendre', text: '↓', disabled: i === list.length - 1, onclick: () => { moveItem(it.id, 'down'); showDashboard(); renderPublic(); } }),
-        el('button', { class: 'btn small', text: 'Dupliquer', onclick: () => dupItem(it) }),
         el('button', { class: 'btn small', text: 'Modifier', onclick: () => showForm(it) }),
         el('button', { class: 'btn small danger', text: 'Supprimer', onclick: () => remove('items', it) })))) :
       el('div', { class: 'empty', text: tab === 'video' ? 'Aucune vidéo pour le moment.' : 'Aucun Short pour le moment.' }));
     addBtn = el('button', { class: 'btn primary', text: tab === 'video' ? '+ Ajouter une vidéo' : '+ Ajouter un Short', onclick: () => showForm(null) });
   }
 
-  const nav = el('nav', { class: 'nav', role: 'tablist', 'aria-label': 'Sections' }, TABS.map(([k, label, d]) =>
-    el('button', { role: 'tab', 'aria-selected': String(tab === k), class: tab === k ? 'on' : null, onclick: () => { tab = k; showDashboard(); } },
-      icon(d), el('span', { text: label }), count[k] != null ? el('em', { text: String(count[k]) }) : null)));
+  const navKids = [];
+  let lastGroup = null;
+  TABS.forEach(([k, label, d]) => {
+    if (TAB_GROUP[k] !== lastGroup) { lastGroup = TAB_GROUP[k]; navKids.push(el('div', { class: 'nav-title', text: lastGroup })); }
+    navKids.push(el('button', { role: 'tab', 'aria-selected': String(tab === k), class: tab === k ? 'on' : '', onclick: () => { tab = k; editing = null; showDashboard(); } },
+      icon(d), el('span', { text: label }), count[k] != null ? el('em', { class: count[k] === 'ON' ? 'hot' : '', text: String(count[k]) }) : null));
+  });
+  const nav = el('nav', { class: 'nav', role: 'tablist', 'aria-label': 'Sections' }, navKids);
 
   const side = el('aside', { class: 'side' },
     el('div', { class: 'brand' },
@@ -1461,11 +1813,9 @@ function showDashboard() {
       el('button', { class: 'btn small', text: 'Déconnexion', onclick: logout }),
       el('button', { class: 'btn small', text: 'Fermer', onclick: closeAdmin })));
 
-  const dirty = isDirty();
   const publish = el('div', { class: 'publish' },
     el('div', { class: 'publish-txt' },
       el('b', { text: 'Publier mes changements' }),
-      el('em', { class: 'pill ' + (dirty ? 'warn' : 'ok'), text: dirty ? '● Modifications non exportées' : '✓ Tout est exporté' }),
       el('span', { text: '1. Exporte tes données  →  2. Dépose le fichier dans ton dossier' })),
     el('div', { class: 'publish-btns' },
       el('button', { class: 'btn-glow', onclick: exportData }, icon(ICON.down), el('span', { text: 'Exporter les données' })),
@@ -1478,15 +1828,16 @@ function showDashboard() {
       e.target.value = '';
       const r = runCmd(v); toast(r, r.startsWith('Erreur') ? 'error' : 'success');
     } });
-  const stat = (n, label) => el('div', { class: 'stat' }, el('b', { text: String(n) }), el('span', { text: label }));
+  const stat = (n, label, d, c) => el('div', { class: 'stat', style: '--c:' + c }, el('span', { class: 'si' }, icon(d)), el('div', {}, el('b', { text: String(n) }), el('span', { text: label })));
+  const showStats = tab === 'video' || tab === 'short';
   const main = el('section', { class: 'main' },
-    el('div', { class: 'dash-head' }, el('h3', { text: TITLES[tab] }), addBtn),
-    cmdBar,
-    publish,
-    !['video', 'short', 'teaser'].includes(tab) ? null : el('div', { class: 'stats' }, stat(count.video, 'vidéos'), stat(count.short, 'Shorts'), stat(count.teaser, 'teasers actifs')),
+    el('div', { class: 'dash-head' }, el('div', { class: 'dash-title' }, el('h3', { text: TITLES[tab] }), el('p', { text: SUBS[tab] })), addBtn),
+    editing ? null : cmdBar,
+    editing ? null : publish,
+    showStats ? el('div', { class: 'stats' }, stat(count.video, 'vidéos', ICON.play, '#8b5cf6'), stat(count.short, 'Shorts', ICON.phone, '#22d3ee'), stat(count.teaser, 'événements actifs', ICON.bolt, '#fbbf24')) : null,
     content);
 
-  const modalEl = el('div', { class: 'modal studio-modal', 'data-pt': getPrefs().panelTheme }, el('div', { class: 'studio' }, side, main));
+  const modalEl = el('div', { class: 'modal studio-modal' }, el('div', { class: 'studio' }, side, main));
   if (!booted && !getPrefs().boot) booted = true;
   if (!booted) {
     booted = true;
@@ -1516,7 +1867,7 @@ const TOG = [
 function dangerReset() {
   if (prompt('Ça remet vidéos, Shorts, teasers et réglages de CE navigateur comme dans le fichier publié (yolao-data.json). Tape RESET pour confirmer.') !== 'RESET') return;
   [...DATA_KEYS.map(k => K[k]), 'yolao.bak', 'yolao.log'].forEach(k => localStorage.removeItem(k));
-  seedLocal(); markPublished(); logAct('Retour aux données publiées'); toast('Données remises à zéro', 'lock'); renderPublic(); showDashboard();
+  seedLocal(); logAct('Retour aux données publiées'); toast('Données remises à zéro', 'lock'); renderPublic(); showDashboard();
 }
 
 function settingsView(s) {
@@ -1547,16 +1898,11 @@ function settingsView(s) {
     pw: el('input', { id: 's-pw', type: 'password', autocomplete: 'new-password', placeholder: 'Laisser vide pour ne pas changer' }),
     vol: el('input', { id: 's-vol', type: 'range', min: 0, max: 100, value: P.volume }),
     idle: num('s-idle', P.idleMin, 0, 240),
-    ptheme: sel('s-ptheme', [['site', 'Couleur du site'], ['neon', 'Néon'], ['retro', 'Rétro'], ['hacker', 'Hacker vert']], P.panelTheme),
     lmins: num('s-lmins', P.lockMins, 1, 10080),
     ltarget: sel('s-ltarget', Object.entries(TARGETS).map(([k, T]) => [k, T.label + ' — ' + T.hint]), P.lockTarget),
     ...Object.fromEntries(Object.keys(SOCIAL_NAMES).map(k => [k, txt('s-' + k, L[k], 'https://…', { type: 'url' })]))
   };
   f.about.value = s.about || '';
-  f.linksTxt = el('textarea', { id: 's-links', rows: 4, placeholder: 'Mon Discord | https://discord.gg/…' });
-  f.linksTxt.value = (s.linksList || []).map(l => l.label + ' | ' + l.url).join('\n');
-  f.evTxt = el('textarea', { id: 's-ev', rows: 3, placeholder: 'Noël | 12-15 | 12-31 | rouge | Joyeuses fêtes !' });
-  f.evTxt.value = (s.events || []).map(e => [e.name, e.from, e.to, e.accent, e.text].join(' | ')).join('\n');
   const tg = Object.fromEntries(TOG.map(([k, l, d, h]) => [k, toggle('s-' + k, l, isOn(s[k], d), h)]));
   const pt = { sound: toggle('s-sound', 'Sons du panel', Sound.on()), boot: toggle('s-boot', 'Animation d’ouverture (« Accès autorisé »)', P.boot), confirm: toggle('s-confirm', 'Demander confirmation avant de supprimer', P.confirmDel) };
   const msg = el('div', { class: 'msg', role: 'alert' });
@@ -1578,12 +1924,8 @@ function settingsView(s) {
     g('Annonce et réseaux', null,
       fld('s-ann', 'Bandeau d’annonce (vide = masqué)', f.ann), fld('s-annt', 'Couleur du bandeau', f.annTone),
       ...Object.keys(SOCIAL_NAMES).flatMap(k => fld('s-' + k, 'Lien ' + SOCIAL_NAMES[k], f[k]))),
-    g('Mes liens', 'Une ligne par lien : Titre | https://… — une section « Liens » apparaît sur le site.', fld('s-links', 'Liens', f.linksTxt)),
-    g('Thèmes d’événement', 'Une ligne par événement : Nom | début (MM-JJ) | fin (MM-JJ) | couleur | message. Appliqué chaque année entre ces dates.',
-      fld('s-ev', 'Événements', f.evTxt),
-      el('button', { class: 'btn small', type: 'button', text: 'Ajouter des exemples (Noël, Halloween)', onclick: () => { f.evTxt.value = (f.evTxt.value ? f.evTxt.value + '\n' : '') + 'Noël | 12-15 | 12-31 | rouge | Joyeuses fêtes !\nHalloween | 10-24 | 11-01 | orange | Joyeux Halloween !'; } })),
     g('Préférences du panel', 'Propres à ce navigateur : elles ne changent rien pour les visiteurs.',
-      pt.sound.node, fld('s-vol', 'Volume des sons', f.vol), fld('s-ptheme', 'Thème du panel', f.ptheme), pt.boot.node, pt.confirm.node,
+      pt.sound.node, fld('s-vol', 'Volume des sons', f.vol), pt.boot.node, pt.confirm.node,
       fld('s-idle', 'Verrouiller le panel après X minutes d’inactivité (0 = jamais)', f.idle),
       fld('s-lmins', 'Durée par défaut d’un verrouillage du site (minutes)', f.lmins), fld('s-ltarget', 'Appareils bloqués par défaut', f.ltarget)),
     g('Publication', null, fld('s-pub', 'Lien de ton dossier d’hébergement (bouton « Ouvrir mon dossier »)', f.pub)),
@@ -1605,11 +1947,6 @@ function settingsView(s) {
     for (const k of Object.keys(SOCIAL_NAMES)) if (!urlOk(val(f[k]))) return bad('Lien ' + SOCIAL_NAMES[k] + ' invalide.');
     if (val(f.mail) && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val(f.mail))) return bad('Adresse e-mail invalide.');
     if (f.pw.value && f.pw.value.length < 8) return bad('Mot de passe : 8 caractères minimum.');
-    const P2 = (txt) => txt.split('\n').map(l => l.split('|').map(x => x.trim())).filter(a => a[0]);
-    const linksList = P2(f.linksTxt.value).map(([label, url]) => ({ label, url: url || '' }));
-    if (linksList.some(l => !isHttp(l.url))) return bad('Mes liens : chaque ligne doit être « Titre | https://… ».');
-    const events = P2(f.evTxt.value).map(([name, from, to, accent, text]) => ({ name, from: from || '', to: to || '', accent: ACCENTS[accent] ? accent : 'violet', text: text || '' }));
-    if (events.some(e => !/^\d\d-\d\d$/.test(e.from) || !/^\d\d-\d\d$/.test(e.to))) return bad('Événements : dates au format MM-JJ (ex : 12-25).');
     const n = (node, lo, hi, d) => { const v = Math.floor(Number(node.value)); return node.value !== '' && Number.isFinite(v) ? Math.min(hi, Math.max(lo, v)) : d; };
     try {
       if (f.pw.value) { localStorage.setItem(K.pw, await sha256(f.pw.value)); f.pw.value = ''; }
@@ -1620,11 +1957,11 @@ function settingsView(s) {
         siteName: val(f.siteName), channelUrl: val(f.chan), contactEmail: val(f.mail), tagline: val(f.tagline), about: val(f.about),
         seoTitle: val(f.seoT), seoDesc: val(f.seoD), accent: f.accent.value, bg: f.bg.value, density: f.dens.value, sort: f.sort.value,
         maxVideos: n(f.maxv, 0, 99, 0), previewDelay: n(f.pdelay, 0, 5000, 450), previewStart: n(f.pstart, 0, 3600, 8),
-        announce: { text: val(f.ann), tone: f.annTone.value }, publishUrl: val(f.pub), links, linksList, events
+        announce: { text: val(f.ann), tone: f.annTone.value }, publishUrl: val(f.pub), links
       };
       TOG.forEach(([k]) => { next[k] = tg[k].inp.checked; });
       save('settings', next);
-      setPrefs({ panelTheme: f.ptheme.value, volume: n(f.vol, 0, 100, 70), idleMin: n(f.idle, 0, 240, 10), boot: pt.boot.inp.checked, confirmDel: pt.confirm.inp.checked, lockMins: n(f.lmins, 1, 10080, 120), lockTarget: f.ltarget.value });
+      setPrefs({ volume: n(f.vol, 0, 100, 70), idleMin: n(f.idle, 0, 240, 10), boot: pt.boot.inp.checked, confirmDel: pt.confirm.inp.checked, lockMins: n(f.lmins, 1, 10080, 120), lockTarget: f.ltarget.value });
       Sound.set(pt.sound.inp.checked);
       showAll = false; msg.textContent = '';
       logAct('Réglages enregistrés'); toast('Réglages enregistrés'); renderPublic();
@@ -1645,14 +1982,6 @@ function showForm(item) {
     pin: el('input', { id: 'f-pin', type: 'checkbox', checked: !!item?.pinned })
   };
   f.desc.value = item?.description || '';
-  f.url.addEventListener('blur', async () => {
-    if (f.title.value.trim() || !isYt(f.url.value)) return;
-    try {
-      const r = await fetch('https://www.youtube.com/oembed?format=json&url=' + encodeURIComponent(f.url.value));
-      const d = r.ok ? await r.json() : null;
-      if (d && d.title && !f.title.value.trim()) f.title.value = d.title;
-    } catch { /* indisponible : on laisse vide */ }
-  });
   const msg = el('div', { class: 'msg', role: 'alert' });
   const form = el('form', {},
     el('h3', { text: item ? 'Modifier' : (tab === 'video' ? 'Ajouter une vidéo' : 'Ajouter un Short') }),
@@ -1678,50 +2007,6 @@ function showForm(item) {
   f.title.focus();
 }
 
-function showTeaserForm(t) {
-  let img = t?.image || '';
-  const f = {
-    title: el('input', { id: 't-title', maxlength: 120, required: true, value: t?.title || '', placeholder: 'Ex : Nouvelle vidéo ce soir !' }),
-    desc: el('textarea', { id: 't-desc', maxlength: 400, placeholder: 'Un petit mot pour donner envie (facultatif)' }),
-    at: el('input', { id: 't-at', type: 'datetime-local', required: true, value: t?.at || defaultAt() }),
-    file: el('input', { id: 't-file', type: 'file', accept: 'image/*' }),
-    url: el('input', { id: 't-img', type: 'url', placeholder: '…ou colle un lien d’image', value: img.startsWith('data:') ? '' : img }),
-    link: el('input', { id: 't-link', type: 'url', placeholder: 'Lien de la vidéo ou de la page (facultatif)', value: t?.link || '' })
-  };
-  f.desc.value = t?.description || '';
-  const msg = el('div', { class: 'msg', role: 'alert' });
-  const prev = el('img', { class: 't-prev', alt: '' });
-  const sync = () => { prev.hidden = !img; if (img) prev.src = img; };
-  sync();
-  f.file.addEventListener('change', async () => {
-    const file = f.file.files[0]; if (!file) return;
-    try { img = await fileToDataUrl(file); f.url.value = ''; msg.textContent = ''; sync(); }
-    catch { msg.textContent = 'Image illisible.'; }
-  });
-  f.url.addEventListener('input', () => { img = f.url.value.trim(); sync(); });
-  const form = el('form', {},
-    el('h3', { text: t ? 'Modifier le teaser' : 'Nouveau teaser / compte à rebours' }),
-    el('label', { for: 't-title', text: 'Titre' }), f.title,
-    el('label', { for: 't-desc', text: 'Description' }), f.desc,
-    el('label', { for: 't-at', text: 'Date et heure de fin du compte à rebours' }), f.at,
-    el('label', { for: 't-file', text: 'Image du teaser (depuis ton ordinateur)' }), f.file,
-    el('label', { for: 't-img', text: 'Ou lien d’image' }), f.url, prev,
-    el('button', { class: 'btn small', type: 'button', text: 'Retirer l’image', onclick: () => { img = ''; f.url.value = ''; f.file.value = ''; sync(); } }),
-    el('label', { for: 't-link', text: 'Lien (bouton « Regarder » quand le compte à rebours est fini)' }), f.link, msg,
-    el('div', { class: 'row' },
-      el('button', { class: 'btn', type: 'button', text: 'Annuler', onclick: showDashboard }),
-      el('button', { class: 'btn primary', type: 'submit', text: 'Enregistrer' })));
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    try {
-      saveTeaser({ title: f.title.value, description: f.desc.value, at: f.at.value, image: img, link: f.link.value }, t?.id);
-      toast('Teaser enregistré'); showDashboard(); renderPublic();
-    } catch (err) { msg.textContent = err.message; }
-  });
-  adminRoot.replaceChildren(openOverlay(el('div', { class: 'modal' }, form)));
-  f.title.focus();
-}
-
 function remove(key, item) {
   if (getPrefs().confirmDel && !confirm(`Supprimer « ${item.title} » ? Cette action est définitive.`)) return;
   try { removeById(key, item.id); logAct('Suppression : ' + item.title); toast('Supprimé'); showDashboard(); renderPublic(); }
@@ -1731,7 +2016,7 @@ function logout() { sessionStorage.removeItem('yolao.admin'); closeAdmin(); toas
 
 // Raccourci W : n'ouvre que la fenêtre de connexion (ce n'est pas une sécurité)
 document.addEventListener('keydown', (e) => {
-  if (PREVIEW || e.key.toLowerCase() !== 'w' || e.ctrlKey || e.metaKey || e.altKey) return;
+  if (e.key.toLowerCase() !== 'w' || e.ctrlKey || e.metaKey || e.altKey) return;
   if (e.target.matches('input, textarea, select, [contenteditable]')) return;
   if (adminRoot.children.length) return;
   e.preventDefault();
